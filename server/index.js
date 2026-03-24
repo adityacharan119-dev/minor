@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const multer = require('multer');
 const mongoose = require('mongoose');
@@ -21,7 +22,7 @@ const app = express();
 app.set('trust proxy', true);
 
 const PORT = process.env.PORT || 5000;
-const uploadDirectory = path.join(__dirname, 'uploads');
+const uploadDirectory = path.join(os.tmpdir(), 'mycraft-uploads');
 const catalogAssetDirectory = path.join(__dirname, 'public', 'catalog-assets');
 const clientBuildDirectory = path.join(__dirname, '..', 'client', 'dist');
 const clientIndexFile = path.join(clientBuildDirectory, 'index.html');
