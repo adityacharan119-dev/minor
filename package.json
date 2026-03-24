@@ -4,10 +4,12 @@
   "description": "MyCraft - Custom Apparel & Fashion E-commerce",
   "main": "index.js",
   "scripts": {
+    "build": "npm --prefix server install && npm --prefix client install && npm --prefix client run build",
     "client": "cd client && npm run dev",
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "install-all": "npm install && cd client && npm install && cd ../server && npm install"
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "start": "node server/index.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

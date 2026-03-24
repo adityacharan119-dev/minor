@@ -91,10 +91,27 @@ function ProductPage() {
       return undefined;
     }
 
-    const nextUrl = URL.createObjectURL(customImage);
-    setCustomImageUrl(nextUrl);
+    let ignore = false;
+    const reader = new FileReader();
 
-    return () => URL.revokeObjectURL(nextUrl);
+    reader.onload = () => {
+      if (!ignore) {
+        setCustomImageUrl(typeof reader.result === 'string' ? reader.result : '');
+      }
+    };
+
+    reader.onerror = () => {
+      if (!ignore) {
+        setCustomImageUrl('');
+      }
+    };
+
+    reader.readAsDataURL(customImage);
+
+    return () => {
+      ignore = true;
+      reader.abort();
+    };
   }, [customImage]);
 
   useEffect(() => {
