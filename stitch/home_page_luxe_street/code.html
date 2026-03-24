@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4af35",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#121212",
+                        "accent-neon": "#00f3ff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+        .gold-gradient {
+            background: linear-gradient(45deg, #d4af35, #f9e29c, #b8860b);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<!-- Logo -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">diamond</span>
+<h1 class="text-2xl font-black tracking-widest text-slate-900 dark:text-slate-100">VANTAGE</h1>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest">
+<a class="hover:text-primary transition-colors" href="#">Collections</a>
+<a class="hover:text-primary transition-colors" href="#">Bespoke</a>
+<a class="hover:text-primary transition-colors" href="#">Journal</a>
+<a class="hover:text-primary transition-colors" href="#">Maison</a>
+</nav>
+<!-- Search & Icons -->
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 border border-transparent focus-within:border-primary/50">
+<span class="material-symbols-outlined text-slate-400 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-slate-500" placeholder="Search archive..." type="text"/>
+</div>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute top-1 right-1 bg-primary text-[10px] text-background-dark font-bold px-1 rounded-full">2</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden border border-primary/20">
+<div class="w-full h-full bg-cover bg-center" data-alt="User profile placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrbCPD9O9_EKgSgwSo9yKXHQXmwHdKcTx1xC8mO9cxDswUQz7p2Cl80Igc5Qbyyt9rkd8WRkD5QIv2AyznHUcmRXXOXEAN8HOd8SZRCcEK9b0mKEwoku8yM3CbnfhHGNNuwE9q6cgNzRzxf3UItQDZRknIogUc15ZvBXwpOxz7aElCVW3DdcS5nD9v1gGQGALQ5tu1P5Tp26Ru4bPFO3sG3E4BL8DHrxPrnJGB5O19YW80nmPPnTXRoGvChUbmK6hP2KU0IOE1Kodo');"></div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[90vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center scale-105" data-alt="High-end fashion model in gold jewelry and neon streetwear" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDaFtAPIXU7Cfb8fw7bVwREzZmoW2-ubpEBxurJVylrgioRIoz1c85_JJVTAX-wdpoRtWdYbnszuj9I6q4oP3bsudtDND7_0Vf6pDp22-qeFsuYC_oUlgMZZ8xftcC9sLCWFUeXL-br6PA9wcHwHqngLqjbNUs22UIBjZAoxtmLH5XaYN6CQ__3uTYm-F_cuJUYWMQ2Yz2HrFHMFZkPwU9arQSp4jppq9nKawVU4fyiMdulTrTWU-hM-8nlDgnb7JRW-Pk_hp2eTmui');"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/60 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="max-w-2xl space-y-8">
+<div class="space-y-2">
+<span class="text-primary font-bold tracking-[0.3em] uppercase text-sm block">Established MMXXIV</span>
+<h1 class="text-6xl md:text-8xl font-black leading-none tracking-tight text-slate-100">
+                            CUSTOM <span class="text-primary">JEWELRY</span> &amp; STREETWEAR
+                        </h1>
+<p class="text-lg text-slate-300 max-w-lg leading-relaxed border-l-2 border-accent-neon pl-4 italic">
+                            Experience the pinnacle of luxury with VANTAGE. Crafted for the bold, designed for the elite. Fusing gold legacy with neon rebellion.
+                        </p>
+</div>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary hover:bg-primary/90 text-background-dark px-10 py-4 font-black uppercase tracking-widest transition-all hover:scale-105 rounded">
+                            Shop Now
+                        </button>
+<button class="border border-slate-500 hover:border-accent-neon text-white px-10 py-4 font-black uppercase tracking-widest transition-all hover:text-accent-neon rounded">
+                            Custom Order
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Categories -->
+<section class="py-24 bg-background-light dark:bg-[#0a0a0a]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+<div>
+<h2 class="text-4xl font-black tracking-tight mb-2">CURATED ARCHIVES</h2>
+<div class="h-1 w-20 bg-primary"></div>
+</div>
+<div class="flex gap-8 border-b border-slate-200 dark:border-slate-800 w-full md:w-auto">
+<button class="pb-4 text-sm font-bold uppercase tracking-widest border-b-2 border-primary text-primary">Traditional</button>
+<button class="pb-4 text-sm font-bold uppercase tracking-widest border-b-2 border-transparent text-slate-500 hover:text-slate-100 transition-colors">Modern</button>
+<button class="pb-4 text-sm font-bold uppercase tracking-widest border-b-2 border-transparent text-slate-500 hover:text-slate-100 transition-colors">Streetwear</button>
+<button class="pb-4 text-sm font-bold uppercase tracking-widest border-b-2 border-transparent text-slate-500 hover:text-slate-100 transition-colors">Jewelry</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="group">
+<div class="relative aspect-[3/4] overflow-hidden bg-slate-900 mb-4 rounded-lg">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Gold 18k curb chain necklace" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9CZqbhzGGZGDYKKcoUTUalqg8BIPhIc26Xi4CS8QHrgUG2noVqRSSBM1rie7C_G3LxYVMYCEmHdJdgVbneMpMK_XmNRO1oRsC9JXJC6nERndIpHHzJuDSc_vM8ZkU5RVl3NqyJWBUxMsGKetifiuEXF4B7z3dN29U3vj7eCkd9nLOHTEITiyD9HPps6P4K7B-XZ703dfv2QQU1R0-j13eS-KJJrPbjg44NlzRWXNLE0kuh0zYkEWNPk3KA-wBjb6xdbj58QM3GIwR');"></div>
+<div class="absolute top-4 right-4 bg-background-dark/80 backdrop-blur px-3 py-1 text-[10px] font-bold tracking-widest text-primary border border-primary/30 uppercase">New Drop</div>
+<button class="absolute bottom-0 left-0 right-0 py-4 bg-primary text-background-dark font-black uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform duration-300">Quick Add</button>
+</div>
+<h3 class="font-bold text-lg uppercase tracking-tight">VANTAGE Gold Curb Chain</h3>
+<p class="text-slate-500 text-sm mb-2 italic">18K Solid Gold / Handcrafted</p>
+<p class="text-primary font-bold">$2,450.00</p>
+</div>
+<!-- Product Card 2 -->
+<div class="group">
+<div class="relative aspect-[3/4] overflow-hidden bg-slate-900 mb-4 rounded-lg border-2 border-accent-neon/20">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Neon blue accent luxury hoodie black" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu4lEWtgpwgpw9ohXRRQb6JfQyxwtVU5o-83lZZjhPriOf_yENKXTWAxR4rVc09_RD6w_vhRxnWjsq6KLejuQcbL1hae2rDIceEBHbW4Lz2JQ2DTwc2FippwiIISh6pzGQDWCdh61GYVahh8RycTGu3jTHscKueRptsyVhvlr447mdTxwj984uT753UoMX0ZTHVpuEejj4u7oVkemut4pvWr7eXcPxeD_562sx77HUVELzUk5V6MXXBPZe0uLJxgEbNszWs9u6qE-T');"></div>
+<div class="absolute top-4 right-4 bg-accent-neon/80 backdrop-blur px-3 py-1 text-[10px] font-bold tracking-widest text-background-dark border border-accent-neon uppercase neon-glow">Neon Series</div>
+<button class="absolute bottom-0 left-0 right-0 py-4 bg-accent-neon text-background-dark font-black uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform duration-300">Quick Add</button>
+</div>
+<h3 class="font-bold text-lg uppercase tracking-tight">Cyber-Lux Oversized Hoodie</h3>
+<p class="text-slate-500 text-sm mb-2 italic">Heavyweight Cotton / Neon Stitch</p>
+<p class="text-accent-neon font-bold">$420.00</p>
+</div>
+<!-- Product Card 3 -->
+<div class="group">
+<div class="relative aspect-[3/4] overflow-hidden bg-slate-900 mb-4 rounded-lg">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Bespoke gold signet ring with diamond" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpurnT2tITT8CmdxoM1XKOoiRUDOP3-I7S2ad1rUCY2iBogHXzKYTAnXbOArHqHqz2ZFxuT_CBBsnsQurVyq78zylBFeKl64i6sF2kQ1IoCeB1CTrsr7Ej6FWuViR3wr852oQXWodc4KEBzQ8zGbJdBIPmFcM0AQKuHJV3TJ42h2I45LP7z-2TXJMwVuuGOfuGrd7Iymhqc4momf6qMS98Rme1ps2hRkPcQUODk26VboZANa-zpCgbsKNZP4dIZULEOQ6pUfzdMmIB');"></div>
+<button class="absolute bottom-0 left-0 right-0 py-4 bg-primary text-background-dark font-black uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform duration-300">Quick Add</button>
+</div>
+<h3 class="font-bold text-lg uppercase tracking-tight">Apex Signet Ring</h3>
+<p class="text-slate-500 text-sm mb-2 italic">Yellow Gold / VVS1 Clarity</p>
+<p class="text-primary font-bold">$3,100.00</p>
+</div>
+<!-- Product Card 4 -->
+<div class="group">
+<div class="relative aspect-[3/4] overflow-hidden bg-slate-900 mb-4 rounded-lg border-2 border-accent-neon/10">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Luxury streetwear cargos with gold hardware" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCxe6tNxVY5ei_2MPncdHr2qdtuv_nKJ7LhcpAi3fKuGsniI_lnzwz20FHHWMEfwq-KD9IIapIqFicRO7ZihABe-VulondpUm1GZU6Zb18a-V-PGPSUA9K1Wz4-1zVjqGVx0PN0N4jrSz58zDlXj-sAYx1FMLJw1T3VWP2Tu9tcBpKIagY9yMy7UZI4kjODB1DGFPgdJ_vxJYLjGq6LxBXfAgWrknjoW00gJipKwXjJDs4DxXYc5-p24LXxjzzFBo3nbj1Lz9TqnYzH');"></div>
+<button class="absolute bottom-0 left-0 right-0 py-4 bg-primary text-background-dark font-black uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform duration-300">Quick Add</button>
+</div>
+<h3 class="font-bold text-lg uppercase tracking-tight">Tactical Gold Cargo</h3>
+<p class="text-slate-500 text-sm mb-2 italic">Japanese Denim / Gold Hardware</p>
+<p class="text-slate-100 font-bold">$890.00</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Brand Story -->
+<section class="py-32 bg-background-dark relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 blur-3xl rounded-full"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="space-y-8">
+<div>
+<span class="text-accent-neon font-bold tracking-[0.2em] uppercase text-xs mb-4 block">The Philosophy</span>
+<h2 class="text-5xl font-black leading-tight italic">WHERE TRADITION MEETS <span class="text-primary underline decoration-accent-neon underline-offset-8">TECHNO</span>.</h2>
+</div>
+<p class="text-slate-400 text-lg leading-relaxed">
+                            Founded in the underground workshops of London and perfected in the ateliers of Milan, VANTAGE was born from a singular vision: to bridge the gap between heirloom-quality jewelry and the high-energy aesthetic of modern streetwear.
+                        </p>
+<p class="text-slate-400 text-lg leading-relaxed">
+                            Every piece is a testament to dualism. We use ancestral techniques to cast 24K gold, then juxtapose it with industrial materials and neon highlights. This is not just fashion; it is a legacy reimagined.
+                        </p>
+<div class="pt-6">
+<a class="text-primary font-bold uppercase tracking-widest flex items-center gap-2 group" href="#">
+                                Learn our Story 
+                                <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square bg-slate-800 rounded-xl overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-700 shadow-2xl shadow-primary/10">
+<div class="w-full h-full bg-cover bg-center" data-alt="Close up of artisan crafting jewelry with neon light reflections" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA9dlBPUbe4pne2678_LTjrHjv-uD5AZQARC6_MxAdNrR7T7aoVXNrSHiI91HaQPXujNBf_MBkCkxqLrMiZoCLHDVWB_LpAMpUs2roKn4LXJ67HjBl0f0Na_U8KlDsbXYFO2XGW2Dz2mX9Eq63Tc3rcCG6aLSHVt3DVEMWSDxp5v6JSFht-Cd9u_OtHQHDGQ4dKQVj4O07YAeR72YShmJzlQC4bwLNKx1DFsEDv_OBNHmmHepazG2E8iVJP7Y5ABZpd3mujxPlBao7z');"></div>
+</div>
+<div class="absolute -bottom-8 -left-8 bg-background-dark border border-primary/30 p-8 rounded-lg max-w-xs -rotate-6 hidden md:block">
+<p class="text-primary font-black text-4xl mb-2 italic">25+</p>
+<p class="text-sm text-slate-400 tracking-wider font-bold uppercase">Generations of master goldsmithing expertise</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-24 bg-background-light dark:bg-background-dark">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl font-black tracking-widest uppercase">The Vantage Circle</h2>
+<p class="text-slate-500 mt-2 italic">Voices of our elite collectors</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="space-y-6 text-center">
+<div class="flex justify-center text-primary">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<blockquote class="text-lg italic text-slate-300">"The fusion of the heavy gold chains with the neon accents is something I've never seen before. Truly the future of luxury streetwear."</blockquote>
+<div>
+<cite class="not-italic font-black text-slate-100 uppercase tracking-widest">Julian Vance</cite>
+<p class="text-xs text-slate-500 uppercase tracking-tighter">Creative Director, Neo-Lux</p>
+</div>
+</div>
+<div class="space-y-6 text-center">
+<div class="flex justify-center text-primary">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<blockquote class="text-lg italic text-slate-300">"Ordered a custom signet ring with neon blue resin inlay. The craftsmanship is divine. It feels heavy, expensive, and completely unique."</blockquote>
+<div>
+<cite class="not-italic font-black text-slate-100 uppercase tracking-widest">Elena Rossi</cite>
+<p class="text-xs text-slate-500 uppercase tracking-tighter">Fashion Editor</p>
+</div>
+</div>
+<div class="space-y-6 text-center">
+<div class="flex justify-center text-primary">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<blockquote class="text-lg italic text-slate-300">"Vantage isn't just a brand; it's a movement. The quality of the hoodies matches the luxury of the jewelry. Unparalleled."</blockquote>
+<div>
+<cite class="not-italic font-black text-slate-100 uppercase tracking-widest">Marcus Kim</cite>
+<p class="text-xs text-slate-500 uppercase tracking-tighter">Lifestyle Collector</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Instagram Gallery Grid -->
+<section class="py-12 bg-background-light dark:bg-[#0a0a0a]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 flex justify-between items-end">
+<div>
+<h2 class="text-xl font-black uppercase tracking-[0.2em]">Live on Feed</h2>
+<p class="text-primary text-sm">@VANTAGE_MAISON</p>
+</div>
+<a class="text-xs font-bold uppercase border-b border-primary pb-1" href="#">Follow Archive</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+<div class="aspect-square bg-slate-800 overflow-hidden group relative">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Instagram shot of street style fashion" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4gUFjtoUZE24rftwJ34GoloNxAJg7_WTL4fUZYsTmNhL2Q11666QHsk_peZKFvbsTpBsr7BaFICMjrNmFqWyiH56IX8QuI0q2gl2x7TWCPVZIfrrz2CLUT7TsSqMjglAoeUb9C_rYgQS-9IO-bNoGuDwlo3yoHCA0otoIpKH1U7Umjnnq0UpvKsNiopGePGLKjO2e2iKFRIlKYa5PTffUiAPLuocaV2hDpdP2H1d-yGuLgW4q6A8tYYjvkMKYpOo6uzPI1_8p0ZDG');"></div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">add_a_photo</span>
+</div>
+</div>
+<div class="aspect-square bg-slate-800 overflow-hidden group relative">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Instagram shot of gold ring details" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlun0R4Jag8TpclCF_9pkBcREPNwa9U1XJGa8hrnr5unIIYBwsxZOViQUJnCakdAw5B0sklNcHLUokd43ulhsFr85nNK4IPbBOOYvt8V8_l7TwtYDrbtScgKoEuzqQ_cNVHPFLSuwuPhHToXsZ16PADy3Tn1JfUVx1PZVTcafagp9cwlGnqwJZYLseBe08XDAPyYLftT8PpYbH4p19t-5EiM4tz_CrdbS6rSK6vHQb398aQ0ECrodp36ffwDIrGPQppLDyg1NfeLQe');"></div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">add_a_photo</span>
+</div>
+</div>
+<div class="aspect-square bg-slate-800 overflow-hidden group relative">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Instagram shot of neon street lights" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuCbmFmZCLiQ1AbojhjEe1Ao5TehwZQQ6-I0UdJdWWgi1l_0s7OVfwlmzHRscqTmjv0jL87_KXQuBE3FCyZBhTU6FqGHM2Oppol3pF_f6yuNlL-hC4FnvBBhWFfQ60PbBoN8ZDrAudCvHFGoqC7hnTgL7am8zBynEn4phePT7i7aP8jxaliRgjNiWPIo9GZ7niVFkR8GyeRGiNIkCWHliivihde7Wc0eBIsm7Z5aY7vNGk3onvqjQLv3noia49JMoozvB9pksZsi3j');"></div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">add_a_photo</span>
+</div>
+</div>
+<div class="aspect-square bg-slate-800 overflow-hidden group relative">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Instagram shot of model in dark hoodie" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDarL_pthMfIXnm7OWoNtiwmRGzvfOGhdIyGeCoh_wiL8uvyrhYbzXG5y_C4zydNaQRkN852O4rBQdsWg5I9P20sFEwYB0UdTOcMr-i4pS6bSyFiTQF41TaG1tYmFLyKup_JDDY9_ojBcj7_FXUws0bOpFdMNNeB-al-mUews8vNtU5Je5iYOg6M7lHhZIhYHsU52nZ5TymHjlrY9ynGaQ0pEGxebYPogNQiSuQi9Xau5PF01H6AQQprXgVzQ3JVhiWzqe4E4FAxYE2');"></div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">add_a_photo</span>
+</div>
+</div>
+<div class="aspect-square bg-slate-800 overflow-hidden group relative">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Instagram shot of luxury packaging" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_F_hvpd9FIY-Q_U4xu3oxvIiJpEmQBbUgybFh6Yk-yai97_W5DFMnXShyELNUI0Fr3zzhZtku_uV2NFDkeVe_JSyl-Q1VEtV6ePzzZq8DDDE7pT3KoFM1r67mh1iR4mXjshL_8zt0cerktLk8twQv_3PGZNP7esh1kB3600DYM_LNeH1c6HbYDub5WAw7RH597Vy4ANJp72XkQsifGI5P-H9aAa_sBxEb70FFsabETIaO4AJZGpaZz28RQZrXdACIIcp3u1dJMEBs');"></div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">add_a_photo</span>
+</div>
+</div>
+<div class="aspect-square bg-slate-800 overflow-hidden group relative">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Instagram shot of workshop tools" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQoLz-kb82NZ_aCjamKSyMpvL7KlLfC1ZUN_DsB_aoqSz2lYRcp0z1dbtHm-60x6KHW2nqnj81xcL2fcR82OOjdDiV5ACqY3M0amB5MZbidvNDxjGYTx1jHnxEd_ForsbI17RxB6ZB-5FGIPXH205YD5WtepuX5c4nnGDZ22x1v_3gIIY9MliOXnE4vlQgf4od18RjjwjML8FAvMeCgR3aZB91OxJwTW7mcLELLgeqrU6wIUUc_37xTgrwGJN7iqvTkz8gP6wPgOdo');"></div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">add_a_photo</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background-dark border-t border-slate-800 pt-20 pb-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+<div class="space-y-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">diamond</span>
+<h2 class="text-2xl font-black tracking-widest text-slate-100">VANTAGE</h2>
+</div>
+<p class="text-slate-500 text-sm leading-relaxed uppercase tracking-tighter">
+                        Redefining luxury for the bold. Fusing timeless craftsmanship with contemporary rebellion.
+                    </p>
+<div class="flex gap-4">
+<a class="h-10 w-10 border border-slate-800 flex items-center justify-center rounded-lg hover:border-primary transition-colors text-slate-400 hover:text-primary" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="h-10 w-10 border border-slate-800 flex items-center justify-center rounded-lg hover:border-primary transition-colors text-slate-400 hover:text-primary" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="h-10 w-10 border border-slate-800 flex items-center justify-center rounded-lg hover:border-primary transition-colors text-slate-400 hover:text-primary" href="#">
+<span class="material-symbols-outlined">campaign</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-slate-100 font-black uppercase tracking-widest mb-6">Collections</h3>
+<ul class="space-y-4 text-slate-500 text-sm font-medium">
+<li><a class="hover:text-primary transition-colors uppercase" href="#">Heritage Gold</a></li>
+<li><a class="hover:text-primary transition-colors uppercase" href="#">Neon Rebellion</a></li>
+<li><a class="hover:text-primary transition-colors uppercase" href="#">Bespoke Orders</a></li>
+<li><a class="hover:text-primary transition-colors uppercase" href="#">Limited Drops</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-slate-100 font-black uppercase tracking-widest mb-6">Concierge</h3>
+<ul class="space-y-4 text-slate-500 text-sm font-medium">
+<li><a class="hover:text-primary transition-colors uppercase" href="#">Size Guide</a></li>
+<li><a class="hover:text-primary transition-colors uppercase" href="#">Shipping &amp; Returns</a></li>
+<li><a class="hover:text-primary transition-colors uppercase" href="#">Care Instructions</a></li>
+<li><a class="hover:text-primary transition-colors uppercase" href="#">Gift Cards</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-slate-100 font-black uppercase tracking-widest mb-6">The Archive</h3>
+<p class="text-slate-500 text-sm mb-4">Join our inner circle for exclusive access to drops and bespoke previews.</p>
+<form class="flex gap-2">
+<input class="bg-slate-900 border-slate-800 rounded px-4 py-2 text-sm w-full focus:ring-primary focus:border-primary" placeholder="Your email" type="email"/>
+<button class="bg-primary text-background-dark font-black px-4 py-2 uppercase text-xs rounded transition-transform hover:scale-105">Join</button>
+</form>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center border-t border-slate-800 pt-10 text-[10px] text-slate-600 font-bold uppercase tracking-[0.2em]">
+<p>© 2024 VANTAGE MAISON ALL RIGHTS RESERVED.</p>
+<div class="flex gap-8 mt-4 md:mt-0">
+<a class="hover:text-slate-300" href="#">Privacy Policy</a>
+<a class="hover:text-slate-300" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

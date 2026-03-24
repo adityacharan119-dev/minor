@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#d4af35",
+                "background-light": "#f8f7f6",
+                "background-dark": "#201d12",
+              },
+              fontFamily: {
+                "display": ["Inter", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-primary/20 px-6 md:px-20 py-4 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<svg class="w-8 h-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-[0.2em] uppercase">Vantage</h1>
+</div>
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Collections</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Bespeak</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Couture</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Heritage</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-slate-100 dark:bg-primary/10 rounded px-3 py-1.5">
+<span class="material-symbols-outlined text-slate-500 dark:text-primary text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-40 placeholder:text-slate-400" placeholder="Find excellence..." type="text"/>
+</div>
+<button class="p-2 text-slate-700 dark:text-slate-300 hover:text-primary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<button class="p-2 text-slate-700 dark:text-slate-300 hover:text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<div class="relative w-full h-[60vh] md:h-[70vh] overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Regal bride wearing intricate red and gold lehenga" style='background-image: linear-gradient(to top, rgba(32, 29, 18, 0.9), transparent), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDubYmLEGYhSe5IYxFfthdFGAEk7Tx-jIKcRgADy8d4XUp-H8SG4aTVKjZp9KauBkqpWk5vHBReX4Te--dzMZWSfAY7AZBODM9egw4y39e9jYc_wFkk_Siz4NVbNpxgz-XZcPNuDGJ6rCQP5np_uDwx1Tj7KiUhcIc_ue1qrpreOF0hfI3maTQ8QOIm5vqhwJ-cjQKt1zVIRwLk6w9gYr9rtkTzcqS5yga0D7Z-U4L7NWMPhyGCU-dsxETaYjadaZYpp2i1Bwpe6lon");'></div>
+<div class="absolute inset-0 flex flex-col justify-end items-center pb-16 px-6 text-center">
+<span class="text-primary tracking-[0.5em] uppercase text-xs mb-4">Established 1924</span>
+<h2 class="text-4xl md:text-6xl font-bold text-white mb-6">The Royal Heritage Collection</h2>
+<p class="text-slate-300 max-w-2xl text-lg font-light mb-8">A symphony of hand-woven silk, antique zari, and centuries of tradition.</p>
+<button class="bg-primary text-background-dark px-10 py-3 font-bold uppercase tracking-widest hover:bg-white transition-all">Explore Collection</button>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="flex items-center gap-4 p-6 overflow-x-auto border-b border-primary/10 bg-background-light dark:bg-background-dark/50 no-scrollbar">
+<button class="flex shrink-0 items-center gap-2 px-5 py-2 rounded-full bg-primary text-background-dark font-semibold text-sm">
+<span>All Collections</span>
+</button>
+<button class="flex shrink-0 items-center gap-2 px-5 py-2 rounded-full bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary font-semibold text-sm border border-transparent hover:border-primary">
+<span>Wedding Wear</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex shrink-0 items-center gap-2 px-5 py-2 rounded-full bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary font-semibold text-sm border border-transparent hover:border-primary">
+<span>Sherwanis</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex shrink-0 items-center gap-2 px-5 py-2 rounded-full bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary font-semibold text-sm border border-transparent hover:border-primary">
+<span>Lehengas</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex shrink-0 items-center gap-2 px-5 py-2 rounded-full bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary font-semibold text-sm border border-transparent hover:border-primary">
+<span>Jewelry</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<!-- Designer Lehengas Section -->
+<section class="px-6 md:px-20 py-16">
+<div class="flex items-end justify-between mb-10 border-l-4 border-primary pl-6">
+<div>
+<h3 class="text-3xl font-bold tracking-tight">Designer Lehengas</h3>
+<p class="text-slate-500 dark:text-primary/60 mt-2 uppercase tracking-widest text-xs">Couture pieces for the modern bride</p>
+</div>
+<a class="text-primary text-sm font-bold uppercase tracking-tighter border-b border-primary pb-1" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden mb-4">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Elegant gold embroidered bridal lehenga on mannequin" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCnnGprsu60dNjEF-KHGVEI6j-s_J2pUoqXOYd3lzM69aFmjvUe93JqcC2s8Pqtckr_tPrLYM3yD9ZejbLl_Mjw-O7_Ia-6EpcdRQOOx0V6EgJCdbp4QD0qSvriAqGmcF-Loysu9j4zBMzeyN71vDOp7QO5Qxcv-rQbZHH07DWl7U0o-iTnwVEiTeh3j-yg-_XR9S9VldYMESsnx7GA39zor7pDJ0L0J66GeXsMAFTw4xdsvthpjkEh6lB5dmbHuHkWna0w3R9jSnVb");'></div>
+<div class="absolute top-4 left-4 bg-primary text-background-dark text-[10px] font-bold px-2 py-1 uppercase">Limited Edition</div>
+</div>
+<h4 class="text-lg font-bold group-hover:text-primary transition-colors">Zardosi Gold Empress</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-2">Hand-embroidered Banarasi Silk</p>
+<p class="text-primary font-bold tracking-wider">$4,200</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden mb-4">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Crimson red velvet lehenga with silver embroidery" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDh_HjoUNFY2lsiSU4tS2qMildFFfRBicFkmancrxGEslYjQOz1W1oJiyZu5hgzbiuIVK9hI-c6fu_N3HusZeCbI2eXS6_7pufAr9UWvtXLAIGS93YwZncASUbkB3Vu6_8l1Qw7KWSkWmDBFGWnuU-y8sBdS1AEOI24H-Y9nE5fCW3hRs2h_nsf2QwjlXgv7HP_C9LBJiJrYpY3lNeBn4-Vywie63rjHKAwuzTrLhJ3AKygZkDRykfYtaRfX915fweia_ONrbcchJS1");'></div>
+</div>
+<h4 class="text-lg font-bold group-hover:text-primary transition-colors">Ruby Velvet Royale</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-2">Micro-velvet with antique silver work</p>
+<p class="text-primary font-bold tracking-wider">$3,850</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden mb-4">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Ivory and pastel green lehenga with floral patterns" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqqe5LzvjpPviCEr8_m8jm3GdCsTwASz-PTrXFJNuGmMW31CzgTYLiEZ6AkuJEgCgPKJQsy1G9ROjJGtQPVn9mx0-CpLFkVF6OrDmkOprOux7vxm3MfEHdU-vRTYQdOn7tXUWbGGv6I4JHyEbqfuhPfXvvtFU4D9OXSrIVkY5pdjWE26WeeZkq9LCMG3barcM7oyrn9tcej2Uw_dXJDwk5H-qTOEXF5QaSvKBbcGY_w88Qf4e5MNF2foI5vzu8_BMS2XX_BuNCAjg2");'></div>
+</div>
+<h4 class="text-lg font-bold group-hover:text-primary transition-colors">Ivory Floral Meadow</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-2">Chiffon blend with mirror detailing</p>
+<p class="text-primary font-bold tracking-wider">$2,900</p>
+</div>
+</div>
+</section>
+<!-- Signature Sherwanis -->
+<section class="bg-primary/5 px-6 md:px-20 py-20">
+<div class="flex flex-col items-center text-center mb-16">
+<h3 class="text-4xl font-bold mb-4 tracking-tighter">Signature Sherwanis</h3>
+<div class="w-24 h-1 bg-primary mb-6"></div>
+<p class="text-slate-600 dark:text-slate-400 max-w-xl">Masterpieces of masculine elegance, combining traditional cuts with contemporary luxury finishes.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="flex flex-col md:flex-row gap-6 items-center">
+<div class="w-full md:w-1/2 aspect-[4/5] bg-cover bg-center" data-alt="Model in emerald green embroidered sherwani" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJPynMluoAEQWQeYUYxyvgL_8MXwJcUHxBdMVulb4LylEIYT_7iML78P6WPkx3x_hBgIqBHgtGN0NZcnDBQcemoJ-0WGUYu9zLbKoBWs1UxfRLpb5rVCeLVbRrEULDe6RMH0BRrFuuUyUoev4ofo6kZzbcVpP-uzPaNJOEO4vhtVcrMyjZCjsNYB7JDoOxtPNjChhgYrAJC8JXsP-M_YWnN1IFwT42r3MSywB2MRGNDAPXLLTjNsVhorMJz_501Uja-RGLzNPiI0w2");'></div>
+<div class="w-full md:w-1/2">
+<span class="text-primary font-bold text-xs tracking-widest uppercase">The Groom's Choice</span>
+<h4 class="text-2xl font-bold mt-2 mb-4">Emerald Heritage Sherwani</h4>
+<p class="text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">Raw silk base featuring tonal emerald thread-work and Swarovski buttons. Includes matching stole and safa fabric.</p>
+<button class="border border-primary text-primary px-6 py-2 font-bold uppercase text-xs hover:bg-primary hover:text-background-dark transition-colors">Custom Fitting</button>
+</div>
+</div>
+<div class="flex flex-col md:flex-row-reverse gap-6 items-center">
+<div class="w-full md:w-1/2 aspect-[4/5] bg-cover bg-center" data-alt="Midnight blue sherwani with silver work" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrpgeLfzFEFLRp-vQeGKJblTIFb7lpXxHnxgr2nCVRmJ406YoDdH7JdKKlb85jc916eHgzkAsSreAX1FL0kchhTKuvbjSF0cGY1LqPerDvGHWZPscwzGJHb0ngfzHeaLlr_ysIGAO4Ic_QJ5pHI2uXxfdgl-YlnZF0QbMeCeSyLCKlt9dpD5dmkJpUlXVeqHztfOJF278CC2aLQyXPo-nqdnOIRnHPX8SMl2AiSGrKxrIRJwBFzVLgJXoAoH6XWPSjVF1AvEekyXy6");'></div>
+<div class="w-full md:w-1/2 md:text-right">
+<span class="text-primary font-bold text-xs tracking-widest uppercase">Evening Couture</span>
+<h4 class="text-2xl font-bold mt-2 mb-4">Midnight Zari Tuxedo</h4>
+<p class="text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">A fusion of the classic sherwani silhouette with modern western tailoring and delicate gold zari lapels.</p>
+<button class="border border-primary text-primary px-6 py-2 font-bold uppercase text-xs hover:bg-primary hover:text-background-dark transition-colors">View Details</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Ethnic Jewelry -->
+<section class="px-6 md:px-20 py-20 bg-background-light dark:bg-background-dark">
+<div class="flex items-center gap-6 mb-12">
+<h3 class="text-3xl font-bold whitespace-nowrap">The Jewelry Atelier</h3>
+<div class="h-px bg-primary/20 w-full"></div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Jewelry Item 1 -->
+<div class="space-y-4">
+<div class="aspect-square bg-slate-100 dark:bg-primary/5 p-6 flex items-center justify-center">
+<div class="w-full h-full bg-cover bg-center" data-alt="Kundan choker necklace with pearls" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAY5cxY-f6RTzLIweGGuBQ_H7VTXlYNC3p7PtpoXk7GfAkuNWeP3JiW7_zHrJ9xpsIyELncKELsbSfRvol02guQYCsZ3sEOJSeYrfG3tXvFvXv-qf5pcYx9x0gpuWjl_wTq_snURVfmT_FIMmOP3CMQFwhXcyDUjmDD_p1GiaL4gQkQVK83P18ZGhgPNZhNWGRSCT3sOSd7pw9sGq6AxVb0PEShY4sV7WQ7bl6_RwCzGQhQAIxDkCtyj1FtjWPiL-602wgz6gMaXVSL");'></div>
+</div>
+<div class="text-center">
+<h5 class="font-bold">Kundan Polki Choker</h5>
+<p class="text-primary text-sm font-semibold">$1,200</p>
+</div>
+</div>
+<!-- Jewelry Item 2 -->
+<div class="space-y-4">
+<div class="aspect-square bg-slate-100 dark:bg-primary/5 p-6 flex items-center justify-center">
+<div class="w-full h-full bg-cover bg-center" data-alt="Traditional gold temple earrings" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALPaEwkoON-zmw-UHJZ-LyQ1ZNRpkZ9hBIrmr0_a_ecU9qjaUHDGpfqHsI2LdcVZywebg3187C4vUVAGs5TXZ9QIpzIRVwXla96i42zJjKFp6LkC4bx67LndD2ijkPLw4jYLFmh9FaWGEXpxjlyrN9PGgxMtDwgKFvAodmwmymq4pXQJ7LfPUslYiq3ARaMdwp0CY3OHyd5y_YqdAmJmHv8Wq9iNXnrpvr5FnjKvGG4honj4KlH_Btil5MlH7-CTzJiWafr7Dky5cV");'></div>
+</div>
+<div class="text-center">
+<h5 class="font-bold">Temple Gold Jhumkas</h5>
+<p class="text-primary text-sm font-semibold">$850</p>
+</div>
+</div>
+<!-- Jewelry Item 3 -->
+<div class="space-y-4">
+<div class="aspect-square bg-slate-100 dark:bg-primary/5 p-6 flex items-center justify-center">
+<div class="w-full h-full bg-cover bg-center" data-alt="Intricate bridal gold bangles" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6cB8Pt9K2OeFBoZxF2yi8e0crYfRI2jb99O_eJkNfiaR_bi7z-A-5MgrZooVJsu8L-NR_1yZEHZfKI7fTirP6H-n2hpmDKjjXvi2hDLEy88QCkUSl6Q-eWqFZdpOid2PKBtzbfLPii2QSTV8NNFSCwR0cbImtDbEya_KqjRkLKIkU7P7cRRXdXktTUzKHJ_Kp-Kqp1GxOEStmoRCriMjpKrR561mWfnKk22es-sh4sYNuRzkGM3nt6gZDZD7NnlXH7tyXvwgI6hMK");'></div>
+</div>
+<div class="text-center">
+<h5 class="font-bold">Antique Kada Set</h5>
+<p class="text-primary text-sm font-semibold">$1,100</p>
+</div>
+</div>
+<!-- Jewelry Item 4 -->
+<div class="space-y-4">
+<div class="aspect-square bg-slate-100 dark:bg-primary/5 p-6 flex items-center justify-center">
+<div class="w-full h-full bg-cover bg-center" data-alt="Traditional maang tikka with ruby and pearls" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCIm2xaCnX81ygexUyjNM1PUrYz6k4TrLWclvrDCaRHuorh1j9cqDhs5TGdaKXEkY37Y15sZ3tODzYJWwAzZ8o9mtmtvfT1ytK7YvATB04Bm2AAdN8DoZzOGN4fVXtXIr3kwifYN0dNOMbZOIYFRShHLgjF7QL0qx6X-fgrtFYCaD2rhhEDKxqYwMZd8xF44y0Fp6_qqwfkm7l1VyQZ0P_L3JU_y1JQtAd23Q8H-seHCx1e--cCnq9aRcPPL34uiytIzJj_6_1SRuoV");'></div>
+</div>
+<div class="text-center">
+<h5 class="font-bold">Royal Ruby Tikka</h5>
+<p class="text-primary text-sm font-semibold">$550</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / Contact -->
+<section class="border-t border-primary/20 bg-background-light dark:bg-background-dark py-16 px-6">
+<div class="max-w-4xl mx-auto text-center">
+<h3 class="text-2xl font-bold mb-4 tracking-tight">Experience Vantage Bespoke</h3>
+<p class="text-slate-500 dark:text-slate-400 mb-8">Schedule a private consultation with our master couturiers for a custom-tailored masterpiece.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<input class="bg-white dark:bg-primary/10 border-primary/20 dark:border-primary/30 focus:border-primary focus:ring-1 focus:ring-primary rounded-lg px-6 py-3 min-w-[300px]" placeholder="Your Email Address" type="email"/>
+<button class="bg-primary text-background-dark px-8 py-3 font-bold rounded-lg uppercase tracking-widest">Book Appointment</button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-slate-900 text-white py-12 px-6 md:px-20 border-t border-primary/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-primary">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 48 48"><path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"></path></svg>
+<span class="font-bold text-lg tracking-widest">VANTAGE</span>
+</div>
+<p class="text-slate-400 text-sm">Timeless elegance, crafted for royalty since 1924.</p>
+</div>
+<div>
+<h5 class="font-bold mb-4 uppercase text-xs tracking-widest text-primary">Collections</h5>
+<ul class="text-sm text-slate-400 space-y-2">
+<li><a class="hover:text-primary transition-colors" href="#">Bridal Couture</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sherwani Royale</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Jewelry &amp; Accessories</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Seasonal Edit</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-4 uppercase text-xs tracking-widest text-primary">Support</h5>
+<ul class="text-sm text-slate-400 space-y-2">
+<li><a class="hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Size Guide</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Order Status</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-4 uppercase text-xs tracking-widest text-primary">Find Us</h5>
+<p class="text-sm text-slate-400">Flagship Boutique<br/>7th Heritage District<br/>Milan, IT</p>
+<div class="flex gap-4 mt-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary">language</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary">mail</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary">share</span>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-white/5 text-center text-[10px] text-slate-500 uppercase tracking-widest">
+                © 2024 Vantage Luxury Traditions. All rights reserved.
+            </div>
+</footer>
+</div>
+</div>
+</body></html>

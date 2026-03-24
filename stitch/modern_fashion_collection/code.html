@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4af35",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#201d12",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<title>VANTAGE | Modern Fashion Collection</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navigation Bar -->
+<header class="flex items-center justify-between border-b border-slate-200 dark:border-primary/20 px-6 md:px-20 py-4 sticky top-0 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md z-50">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">flare</span>
+</div>
+<h1 class="text-slate-900 dark:text-slate-100 text-2xl font-bold tracking-widest">VANTAGE</h1>
+</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Collections</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">New Arrivals</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Editorial</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center bg-slate-100 dark:bg-primary/10 rounded px-3 py-1.5 border border-transparent focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-slate-400 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-40 placeholder:text-slate-500" placeholder="Search collection" type="text"/>
+</div>
+<div class="flex gap-4">
+<button class="relative text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-background-dark font-bold">2</span>
+</button>
+<button class="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<!-- Hero Section -->
+<section class="relative h-[70vh] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="High fashion model in dark architectural setting" style="background-image: linear-gradient(to right, rgba(32, 29, 18, 0.8), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_Q4NQ4bwCD-bM1EVwPF8eBldq-j3w-OhATv9tXYf2regFKGLOVFQeg6qNsqOr8mYXFX3p0uvUpNPNrVZXGG2b7Kl_U8GPXVaOG9YSWqTlDGL0_nIi6Oomrs0uNxom7osC-Evg2H3UvNdoY2ocoS4P_qqunRP7BHIttTKf2fcWRVKMy9S0OhK1BhmHbLY_5PYjx9YtFBuIHwfimdx8LeY6pJ40poeGqhl4NwQ4jtNn0HimJ1IEIFIlH-msk8SVBZICKqvAFw2F1pQw');"></div>
+<div class="relative h-full flex flex-col justify-center px-6 md:px-20 max-w-4xl">
+<span class="text-primary font-semibold tracking-[0.3em] uppercase mb-4 text-sm">Autumn / Winter 2024</span>
+<h2 class="text-slate-100 text-5xl md:text-7xl font-light leading-tight mb-8">The Modern <br/><span class="font-bold italic">Noir</span> Collection</h2>
+<div class="flex gap-4">
+<button class="bg-primary text-background-dark px-8 py-3 font-bold uppercase tracking-widest text-sm hover:bg-white transition-all">Explore Now</button>
+<button class="border border-white/30 text-white px-8 py-3 font-bold uppercase tracking-widest text-sm hover:bg-white/10 backdrop-blur-sm transition-all">View Lookbook</button>
+</div>
+</div>
+</section>
+<!-- Category Tabs -->
+<div class="sticky top-[73px] bg-background-light dark:bg-background-dark z-40 border-b border-slate-200 dark:border-primary/10">
+<div class="flex justify-center gap-12 px-6 overflow-x-auto no-scrollbar">
+<a class="flex flex-col items-center border-b-2 border-primary text-primary py-5 px-4 whitespace-nowrap" href="#">
+<span class="text-xs font-bold uppercase tracking-widest">Modern Dresses</span>
+</a>
+<a class="flex flex-col items-center border-b-2 border-transparent text-slate-500 hover:text-primary py-5 px-4 transition-colors whitespace-nowrap" href="#">
+<span class="text-xs font-bold uppercase tracking-widest">Sculpted Suits</span>
+</a>
+<a class="flex flex-col items-center border-b-2 border-transparent text-slate-500 hover:text-primary py-5 px-4 transition-colors whitespace-nowrap" href="#">
+<span class="text-xs font-bold uppercase tracking-widest">Oversized Blazers</span>
+</a>
+<a class="flex flex-col items-center border-b-2 border-transparent text-slate-500 hover:text-primary py-5 px-4 transition-colors whitespace-nowrap" href="#">
+<span class="text-xs font-bold uppercase tracking-widest">Minimal Jewelry</span>
+</a>
+</div>
+</div>
+<!-- Product Grid -->
+<section class="max-w-[1400px] mx-auto py-16 px-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden bg-slate-200 dark:bg-primary/5 rounded">
+<img alt="" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Elegant black silk slip dress" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxzrgNlYXMNNqGjWYgyG5kM0cWsNQuHR4f-piYR_yJhlh_QbZBnYaBldV3l2Beohoa5JsIr3G28fsPIfw8BJclWxvIMLsrI2yjAim2hGTuJDy3M0opAFZQrZEfiFMzG3BsCyOXx5oliPGDVIt8rqmSuMS2joULIRv854QmNgJhPv7eZhwUmK_XIC9jYtf00gKeA6Bt3hpyBtgSlg3PN5dMPxx-nQEtgxCKhErnNY7lhtEG31vegTy7HpldLE8oqF50GryT96O_y_BK"/>
+<div class="absolute top-4 right-4">
+<button class="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform bg-gradient-to-t from-background-dark/80 to-transparent">
+<button class="w-full bg-white text-background-dark py-3 font-bold text-xs uppercase tracking-tighter">Add to Cart</button>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<div>
+<h3 class="text-lg font-medium">The Silk Slip</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Midnight Black</p>
+</div>
+<p class="font-bold text-primary">$450</p>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden bg-slate-200 dark:bg-primary/5 rounded">
+<img alt="" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Tailored charcoal wool blazer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrv-4uqPP-P54rjpQkvhGxjDhFBAMgMdSLti9SPVtZz24IuzphrLqYcwoG35brZH1zCmZ6Oy3KEQyp8aNYVo6NUlah6XKODiNVBl6eaHcH1eKGyU45ZQhG5uo6FqDEUiIkZU6_yxg3vT3k8OcvtFKAQsvECd_ljsvrjiY0g2dzOISntvlY4JBd_zXcq4vAAXSuV2JWB0CT4_5OXUSNMD3JMWxEJfWDPhkdbF2ar5tCwN4dEZ1YrSTEM8KKK7TSm8IVteig2UCZuClH"/>
+<div class="absolute top-4 right-4">
+<button class="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform bg-gradient-to-t from-background-dark/80 to-transparent">
+<button class="w-full bg-white text-background-dark py-3 font-bold text-xs uppercase tracking-tighter">Add to Cart</button>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<div>
+<h3 class="text-lg font-medium">Structured Blazer</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Charcoal Wool</p>
+</div>
+<p class="font-bold text-primary">$890</p>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden bg-slate-200 dark:bg-primary/5 rounded">
+<img alt="" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist gold necklace set" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7O9V5zh0uRKENjvGkdD64wY66XpgG9yqkj7GIGlL5X4mSedIN0XI4tQnG3n-vcuzvupVYnzJIRl2cFUf4r2K80jp8CXmCEY3kv7lQ3LWHoTMj84TRnxj6_GJvLE8D-hSLsxdTZknP6yZeOPPIe8gu6gb8IacB0WJ3LWKi9q2GoDJCITAVsg9wVFamh1Wgad-Jx9i2p3Z-qKsmwJx6a5NPcR1Q8StMrItPcVjsydLbhHio7AG_9QAlJEzV13n31dy7VSK-FkkTCnQp"/>
+<div class="absolute top-4 right-4">
+<button class="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform bg-gradient-to-t from-background-dark/80 to-transparent">
+<button class="w-full bg-white text-background-dark py-3 font-bold text-xs uppercase tracking-tighter">Add to Cart</button>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<div>
+<h3 class="text-lg font-medium">Eclipse Pendant</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">18k Gold Plated</p>
+</div>
+<p class="font-bold text-primary">$210</p>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[3/4] overflow-hidden bg-slate-200 dark:bg-primary/5 rounded">
+<img alt="" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Model wearing sculpted architectural suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDSiCCdjw9O8n834V_JqNEouEwY0ChpPPJMDcUD9WC28_17k2qoUG-Veu6oZpoXQQwwCvcXKQjXd5LPfjVSqpWpC0PaFveHsNimEiaw3AFtA4Hq-5y5rjEc7VPw-t2F8vu4SMgyslWK0SKSQuOWWn_gfOXjkqplsao188leT9kRz1J_A2gYzySwPjJb0XLcfSSyr0Vio2nTXAvfvjIIT2jpEUlduV152HzhDm_cejloatBxiJ5OuhRxNTSEcdp8kilG-v4Zg1FFOFV"/>
+<div class="absolute top-4 right-4">
+<button class="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform bg-gradient-to-t from-background-dark/80 to-transparent">
+<button class="w-full bg-white text-background-dark py-3 font-bold text-xs uppercase tracking-tighter">Add to Cart</button>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<div>
+<h3 class="text-lg font-medium">Architectural Suit</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Bespoke Navy</p>
+</div>
+<p class="font-bold text-primary">$1,200</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Feature -->
+<section class="bg-primary/5 py-20 px-6">
+<div class="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1">
+<h2 class="text-4xl font-bold mb-6 italic leading-tight">Craftsmanship in Every Thread.</h2>
+<p class="text-slate-400 text-lg leading-relaxed mb-8">
+                            VANTAGE represents the intersection of timeless silhouettes and contemporary edge. Each piece in our collection is meticulously crafted in our European ateliers, focusing on sustainable fabrics and unparalleled tailoring.
+                        </p>
+<div class="flex flex-col gap-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">diamond</span>
+<div>
+<h4 class="font-bold uppercase tracking-widest text-xs mb-1">Premium Materials</h4>
+<p class="text-slate-500 text-sm">Sourced from the finest mills in Italy and Japan.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">eco</span>
+<div>
+<h4 class="font-bold uppercase tracking-widest text-xs mb-1">Ethical Production</h4>
+<p class="text-slate-500 text-sm">100% transparent supply chain and fair labor practices.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 md:order-2 grid grid-cols-2 gap-4">
+<div class="space-y-4">
+<div class="aspect-[4/5] overflow-hidden rounded">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Close up of fabric texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsxAQL7iFbp-emgA0sbXHd4ZhM9tVpQYGzrQfmJNm_gXMGMhvo4R6PdzU5xCtEkm0Zh6yww8909yFktTrgfMNw--uazyLBZ8Ty4BskvKT-Bn-dWp1xBeg5faMXoOeiI5zqaaxfCiHVyHq3W55fJTS8oJwNUrgNDxb-z8TiHuoyy1fJloYEC2LQucJ87_1_b0AH2qbj_en0vXtEvMyzl7x6Lk2Q3pQN5yEF_mF07X5mfzrBk-uaFFjL0leVhzrv0otttOHUc6ge66Rt"/>
+</div>
+<div class="aspect-square overflow-hidden rounded">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Jewelry designer at work" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChy3Gg5dKljWuzTYCVdDkD2g0Ywcdw8vcHS_Fev5wHoNg0JJ6gTOor9C6s6uK4P4hJ7F24ziN-eeMGk6kPcskUeUJzIQnaaRPeBmas_rzqJHBNvIsn-IS-FaMfMsKNgK2PUInycNXE8p6udnH5bw_qAKf4NPhVyO0EeGR2g0mjNPjbjbI_pcUE6-Vef52bcn5f4P6Op0sbKZ0PiEUOPzJ_CKqemZBiy5SwVtQdh-SZG6y-U1Yq-z0OExkMT4wEjsauQiV4ZSU6ZdiU"/>
+</div>
+</div>
+<div class="pt-12">
+<div class="aspect-[3/5] overflow-hidden rounded">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Fashion atelier with mannequins" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKV3Po_T8v3YnStsms20Eycncd1IfzqmrllQT3Os361MlQpwOqnIok73bP1KHCCP5e6UIzsyjAF5DDAmUwH110o2McitP4LVkkcNDx3Aol7ofAovXlWu1nsk_kOuk8ktPI6R3jqLZvtWPdrDUjXdXRtGbz4R8Xmta4oFC0UafSgiNGlYhYAs7gJAwWrcNDHk8A8onXyvZ-TuY42Lun11SkkMgifevz6rgUrluNQX-ub6JLv2z2lrXXrlR3ie1V7ZBqVa4aQYeJ6OV"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background-dark border-t border-primary/20 py-16 px-6">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+<div class="space-y-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">flare</span>
+<h2 class="text-white text-xl font-bold tracking-widest">VANTAGE</h2>
+</div>
+<p class="text-slate-500 text-sm leading-relaxed">
+                        Elevating modern wardrobes through intentional design and uncompromising quality.
+                    </p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Collections</h4>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">Spring / Summer</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Autumn / Winter</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Essential Series</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Limited Edition</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Client Care</h4>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Size Guide</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Personal Styling</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Newsletter</h4>
+<p class="text-slate-500 text-sm mb-4">Join for early access to new collections.</p>
+<div class="flex flex-col gap-2">
+<input class="bg-primary/5 border border-primary/20 rounded px-4 py-2 text-sm focus:ring-1 focus:ring-primary outline-none" placeholder="Email Address" type="email"/>
+<button class="bg-primary text-background-dark font-bold py-2 text-xs uppercase tracking-widest hover:bg-white transition-all">Subscribe</button>
+</div>
+</div>
+</div>
+<div class="max-w-[1400px] mx-auto mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-600 uppercase tracking-[0.2em]">
+<p>© 2024 VANTAGE COLLECTIVE. All Rights Reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-slate-300" href="#">Privacy Policy</a>
+<a class="hover:text-slate-300" href="#">Terms of Service</a>
+<a class="hover:text-slate-300" href="#">Accessibility</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

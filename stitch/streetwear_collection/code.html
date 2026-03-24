@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VANTAGE | Streetwear Collection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4af35",
+                        "accent-cyan": "#00f3ff",
+                        "accent-green": "#39ff14",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#201d12",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .cyber-grid {
+            background-image: linear-gradient(to right, rgba(212, 175, 53, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(212, 175, 53, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .glow-cyan:hover {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+        }
+        .text-neon-cyan { color: #00f3ff; text-shadow: 0 0 5px rgba(0, 243, 255, 0.5); }
+        .text-neon-green { color: #39ff14; text-shadow: 0 0 5px rgba(57, 255, 20, 0.5); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen cyber-grid">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between border-b border-primary/20 px-6 lg:px-20 py-4 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center border-2 border-primary rotate-45">
+<span class="material-symbols-outlined -rotate-45">adjust</span>
+</div>
+<h2 class="text-slate-100 text-2xl font-black leading-tight tracking-tighter uppercase">VANTAGE</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-300 hover:text-primary text-xs font-bold uppercase tracking-widest transition-colors" href="#">New Arrivals</a>
+<a class="text-primary text-xs font-bold uppercase tracking-widest transition-colors border-b-2 border-primary" href="#">Shop</a>
+<a class="text-slate-300 hover:text-primary text-xs font-bold uppercase tracking-widest transition-colors" href="#">Collections</a>
+<a class="text-slate-300 hover:text-primary text-xs font-bold uppercase tracking-widest transition-colors" href="#">Lookbook</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden lg:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded bg-primary/10 border border-primary/20">
+<div class="text-primary flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent text-slate-100 focus:ring-0 placeholder:text-primary/40 px-4 text-sm font-medium" placeholder="SEARCH SYSTEM..."/>
+</div>
+</label>
+<div class="flex gap-3">
+<button class="flex size-10 items-center justify-center rounded bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-background-dark transition-all">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 lg:px-40 py-10">
+<div class="flex flex-col gap-2 mb-12 relative">
+<div class="absolute -left-10 top-0 w-1 h-full bg-primary/50"></div>
+<h1 class="text-slate-100 text-6xl font-black leading-tight tracking-tighter uppercase italic">
+                        Streetwear <span class="text-neon-cyan">Collection</span>
+</h1>
+<p class="text-primary/60 text-lg font-medium max-w-xl uppercase tracking-tight">
+                        Void, Urban, and Cyber aesthetics for the modern nomad. <span class="text-neon-green font-bold">// SYSTEM_v2.0_LOADED</span>
+</p>
+</div>
+<div class="flex flex-wrap items-center gap-4 mb-8">
+<div class="flex items-center gap-2 pr-4 border-r border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm">filter_list</span>
+<span class="text-xs font-bold uppercase text-primary/80 tracking-widest">Filters</span>
+</div>
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-primary/10 border border-primary/30 px-4 text-slate-100 hover:border-accent-cyan hover:text-accent-cyan transition-all group">
+<p class="text-xs font-bold uppercase tracking-widest">Category</p>
+<span class="material-symbols-outlined text-sm group-hover:rotate-180 transition-transform">expand_more</span>
+</button>
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-primary/10 border border-primary/30 px-4 text-slate-100 hover:border-accent-cyan hover:text-accent-cyan transition-all group">
+<p class="text-xs font-bold uppercase tracking-widest">Size</p>
+<span class="material-symbols-outlined text-sm group-hover:rotate-180 transition-transform">expand_more</span>
+</button>
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-primary/10 border border-primary/30 px-4 text-slate-100 hover:border-accent-cyan hover:text-accent-cyan transition-all group">
+<p class="text-xs font-bold uppercase tracking-widest">Color</p>
+<span class="material-symbols-outlined text-sm group-hover:rotate-180 transition-transform">expand_more</span>
+</button>
+<div class="flex-1"></div>
+<div class="flex gap-4">
+<button class="text-xs font-bold uppercase tracking-widest text-primary border-b-2 border-primary pb-1">All Products
+</button><button class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-primary transition-colors pb-1">Featured
+</button><button class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-primary transition-colors pb-1">Sale
+</button></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+<div class="group relative flex flex-col gap-4">
+<div class="relative w-full aspect-[3/4] overflow-hidden rounded bg-slate-900 border border-primary/10 group-hover:border-accent-cyan/50 transition-colors">
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 group-hover:scale-110 group-hover:opacity-0" data-alt="Void Minimal Tee front view on a model in urban setting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAdtNUmf5uHQ-5BzWu_5MZPav_e6VhGq6RVN_bHfXdAcfccwtKulpc8vkvPSJGI8VAyY0-9uEZvqFxHv9BN6x4hIuSRNjcsMn33HuxkdQ-vPyC-JLKp5KOAJoshUIuCxq-zdW69LcZq2dXxZZZmm7Zu_DTIOpXvUi9Dh2hCK-HjUOTz0o2vCB4pZ7FyAp8686Qsm0dDdJZoQlJz3kuwTnyw2NcXpn2QoRQAr48dsotaL81Vq28C4WO9phWH3Y2TEkzhDL6IqeU3j9R9");'></div>
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 scale-105 opacity-0 group-hover:opacity-100" data-alt="Void Minimal Tee detail back view" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCsAVdU8Mhsh7Axd-326vP3cu1IKJOitnJhU1hoClw9yg5Fq2xgG1Qte24gXPY6ixGOXd9ibJtltvYb_IyWXD6ad3C4WOq_uJbyKVjxdVTEAns4ZBIWZJ2p8nLhBHJY6zPy_R3Y6NR_gklCqwz0RGImUK2kXAbs2yYD8pOMie9HF5McjwUinBK0S3GMSmCA1NVenuyN7Um09rLzvLuZi4ipGxym8_to8X231v-KsT5B20QiGCoQ4_FxvGb94uIVHL2bY526NZX6Ol68");'></div>
+<div class="absolute top-4 left-4 bg-background-dark/80 backdrop-blur px-2 py-1 border border-accent-cyan">
+<span class="text-[10px] font-black uppercase text-accent-cyan tracking-tighter">NEW_RELEASE</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-100 text-lg font-black uppercase italic tracking-tighter group-hover:text-accent-cyan transition-colors">Void Minimal Tee</h3>
+<p class="text-primary font-bold">$45.00</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-accent-cyan"></div>
+<p class="text-primary/60 text-xs font-bold uppercase tracking-widest">Neon Cyan Accent</p>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col gap-4">
+<div class="relative w-full aspect-[3/4] overflow-hidden rounded bg-slate-900 border border-primary/10 group-hover:border-accent-cyan/50 transition-colors">
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 group-hover:scale-110 group-hover:opacity-0" data-alt="Urban Grid Tee main look" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDyL2KbGU7mG3p9z18sYmV4U_xtZnCE3gMFRQxIo0vIYQl5_mUoadHsAMwLijKB1SswKKGUxhSfXT8ydD-DVcU0x1wwba_pQvP_4K5j2IhU_G-g5WxKK2lsuexiff3ZzShO4TREOWduio4yKFfmk-GZUdj5LnohsL_RvQ2skbgtfMrPfYXNr-2H-HsDcjKZC0XTljqHL2NRv-sKIkGbGdLasoO7rln8MEysIxTQQfTrmZmCrP7EBG_zAAq0kkj0EMzHG76BKIlaPT0g");'></div>
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 scale-105 opacity-0 group-hover:opacity-100" data-alt="Urban Grid Tee close up print" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALUY-iw2IL9JY3fan1ciEBuTYN0Y1tPsPg6uyCqk0BcjvCIBZVokfI9IX6kP3b4kjrWdZCv_hA_-U6GXSnfa6zPi9AorzKB_ggcImj7lgXVZxA5ZglA6E1CUDP1jTDF7Q0LLSTVLNXz2jbS1i7C8cezTa2dHQxbgOMh3qtjmYG53oaAGvgdLuQFRZRhA8gmTGHYNGGanI5_VB5OLGzWdw8Cjh2v0r1yjXa4s4g0oCQhPEtRhWXfl5bvv2MUNITsNwq8F8CQeM0lgvu");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-100 text-lg font-black uppercase italic tracking-tighter group-hover:text-accent-cyan transition-colors">Urban Grid Tee</h3>
+<p class="text-primary font-bold">$48.00</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-slate-500"></div>
+<p class="text-primary/60 text-xs font-bold uppercase tracking-widest">Cyber Print</p>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col gap-4">
+<div class="relative w-full aspect-[3/4] overflow-hidden rounded bg-slate-900 border border-primary/10 group-hover:border-accent-cyan/50 transition-colors">
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 group-hover:scale-110 group-hover:opacity-0" data-alt="Tokyo Street Tee with graphics" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4rHcnAvxsHdjv_d360DvWmmpxEV1TaRYwtS_5OefOOzQ5Hfhrncf9AE66Y-xmXlGXOe1i5AQp1NDm0nNkRGV0SUhB3Sqh03y4gJMAwZm8epI9Jci8a6Kw7RPmdKA0-_L7JaP_ZKoMSaJlDQBCjLR5LS8G1rGj6K8VAwX7weWLYKcZu9KIZbG9XL1VbIcRzCrx5IIteGWBu0m_ySdZdTrXc7V19lpj8TKQyoXk7dpdDKq7-Z1s0A2wd0bhrK--MoucUMJ1D2gg7VQF");'></div>
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 scale-105 opacity-0 group-hover:opacity-100" data-alt="Tokyo Street Tee graphic detail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0ZMGAFsHc2ERBXXbtwfldBBeS6-cAJqSeeHsx4cHnGJg2SLsZoUOFxiuTi0B_iLGUylPyER2JBbYiEzOnY29V5r4Ux-D-Ptd0gVG9YmKV0JaLE-iszPpJrk5woDg9iygLaVOh9C7aAbFMeIR-B_1-X19wlatsSaR0TWUofrEv803-07eGfb-Fi3o0aggy0hD_JhzD-BASK-PttHNEN9GjZrrypPVCnqqiVcwl1VxUbz3BYBe0pnmrMaEInsznmGeMP7JVU2w3k_n6");'></div>
+<div class="absolute bottom-4 right-4 bg-background-dark/80 backdrop-blur px-2 py-1 border border-accent-green">
+<span class="text-[10px] font-black uppercase text-accent-green tracking-tighter">LIMITED_RUN</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-100 text-lg font-black uppercase italic tracking-tighter group-hover:text-accent-cyan transition-colors">Tokyo Street Tee</h3>
+<p class="text-primary font-bold">$52.00</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-accent-green"></div>
+<p class="text-primary/60 text-xs font-bold uppercase tracking-widest">Graffiti Detail</p>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col gap-4">
+<div class="relative w-full aspect-[3/4] overflow-hidden rounded bg-slate-900 border border-primary/10 group-hover:border-accent-cyan/50 transition-colors">
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 group-hover:scale-110 group-hover:opacity-0" data-alt="NeoStreet Hoodie front view oversized" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBQAX6czn7IDeTpvCqnvw4rlnV-hQTY9vmyCiE9vHLWaXSMR6Jc0FsK7sbu754JVbMeHWAB3IgXOuEWRK_p7ePs5ux1dJGG5LvfQqYzSDptOvY-ZGS74jCg6fQueBzdNGmoZRErApgafmazUQgc7omyFTRVQft7lYB4CTbmbyYVhSIjB7Hrq_QZ3LzMx7EWsUESH9rjvGIgXF_jRtOFTv60KMYpqQh4bnxSMFxllR3dvAhl8Ci3wDVlogMdwFm8JRIWB2L9YfxUhaca");'></div>
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 scale-105 opacity-0 group-hover:opacity-100" data-alt="NeoStreet Hoodie hood detail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDGfVGl3VxggEVD-CAzcMEbF8NqKcwGeR3RK5mAaIafd7xxQvUMEkj5CDthRY_GkcjPtB4-YGwUByh7434zZknLu2p06CDdtKManTk-O3RclKZI0_sviIFWvlPpw13qEEgxSgzff6sQ86Cg78QQdyuPMhKGBbuE79GUQlJcLc1r5H1lwl9-GralmxP7pxfiXXvQ7PQY86ZEvTnIkKi73ROtJQDIsVHYritYcwOA-8LxJvz160S53y_C-RDXIPg7Voo_BCSNeuphvR5p");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-100 text-lg font-black uppercase italic tracking-tighter group-hover:text-accent-cyan transition-colors">NeoStreet Hoodie</h3>
+<p class="text-primary font-bold">$85.00</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<p class="text-primary/60 text-xs font-bold uppercase tracking-widest">Oversized Fit</p>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col gap-4">
+<div class="relative w-full aspect-[3/4] overflow-hidden rounded bg-slate-900 border border-primary/10 group-hover:border-accent-cyan/50 transition-colors">
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 group-hover:scale-110 group-hover:opacity-0" data-alt="Cyber District Hoodie technical wear" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKGzBa0lgUwzQ9MyMWXSm8qvJW4kpONL9pO8X84-1FDFm0vLl4QHM5F7WnUA_t9MXApRLhheGX9jFoNADHxeq4J0JHwAneIKy_Lte3fQJBmNpiEgrx6r0EZRZYf_ivDfW39ZrX6De4SFmQCQZWUMMsJoiKcgP1DNLLuc-Yo1RPa2qlq3Zzul1LF9mQ4DNCFFxWKICvIgMgLmhIDMFUtYL5SZ1V9F1fkllHgPHG3iedvWVMR0QgRH-FYUkbbtt7QwMP1NdNAyEvOrVg");'></div>
+<div class="absolute inset-0 bg-center bg-cover transition-all duration-500 scale-105 opacity-0 group-hover:opacity-100" data-alt="Cyber District Hoodie functional pockets" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAil246pfSLueemHJJuyp9q9EGhRGuajhPHcyEbSL2w7hkAB4aYMck483ZaPOUixGaSbXl9NM53Mog3bfgiefHsTAipj8CunVCXGXrHwhId_gL7aV2COkWO3rT0cO1wBmCyrzk6w3a6Oty0t6E1xxfV5SHqaYBb5B8CsJ8DYD4EHEAN5AjPTbUTadHriXof-3GD7TzGnGeIzZCsMokxQiO1ZZXwJX1Q2P1GrOjFUHhJdDDFaduZP77fkNebRo72Ggx-Ys4dN2UBwsJ5");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-100 text-lg font-black uppercase italic tracking-tighter group-hover:text-accent-cyan transition-colors">Cyber District Hoodie</h3>
+<p class="text-primary font-bold">$95.00</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-slate-100"></div>
+<p class="text-primary/60 text-xs font-bold uppercase tracking-widest">Tech Fleece</p>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col items-center justify-center border-2 border-dashed border-primary/20 aspect-[3/4] rounded p-10 hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-4xl text-primary/40 group-hover:text-primary transition-colors">refresh</span>
+<p class="text-primary/40 group-hover:text-primary font-black uppercase text-center mt-4 tracking-tighter">Reloading<br/>Inventory</p>
+</div>
+</div>
+<div class="mt-20 py-10 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col gap-2">
+<h4 class="text-slate-100 font-black uppercase tracking-tighter">Join the District</h4>
+<div class="flex h-12 w-full md:w-80">
+<input class="flex-1 bg-primary/10 border-primary/20 border-r-0 text-slate-100 focus:ring-0 placeholder:text-primary/30 text-xs font-bold uppercase tracking-widest px-4" placeholder="NEURON_ID@VOID.NET" type="email"/>
+<button class="bg-primary text-background-dark font-black uppercase px-6 text-xs tracking-widest hover:bg-accent-cyan transition-colors">Join</button>
+</div>
+</div>
+<div class="flex gap-8">
+<a class="text-primary/60 hover:text-accent-cyan transition-colors" href="#"><span class="material-symbols-outlined text-3xl">public</span></a>
+<a class="text-primary/60 hover:text-accent-cyan transition-colors" href="#"><span class="material-symbols-outlined text-3xl">terminal</span></a>
+<a class="text-primary/60 hover:text-accent-cyan transition-colors" href="#"><span class="material-symbols-outlined text-3xl">memory</span></a>
+</div>
+</div>
+</main>
+</div>
+</div>
+<div class="fixed bottom-6 right-6 z-50 pointer-events-none opacity-20 hidden lg:block">
+<p class="text-[120px] font-black uppercase text-primary/10 italic leading-none select-none tracking-tighter">VANTAGE</p>
+</div>
+</body></html>
