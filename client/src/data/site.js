@@ -1,85 +1,78 @@
 export const collectionMeta = {
-  traditional: {
-    title: 'Traditional Collection',
-    eyebrow: 'Heritage Atelier',
-    description:
-      'Wedding wear, designer lehengas, sherwanis, kurtas, and heirloom jewelry built with couture tailoring and ceremonial detail.',
-    accent: 'gold',
-  },
-  modern: {
-    title: 'Modern Fashion Collection',
-    eyebrow: 'Tailored Future',
-    description:
-      'Minimal silhouettes, sculpted dresses, sharp suiting, and contemporary jewelry with clean architectural lines.',
-    accent: 'ice',
-  },
   streetwear: {
     title: 'Streetwear Collection',
-    eyebrow: 'Limited Drop',
+    eyebrow: 'Priority Drop',
     description:
-      'Oversized tees, heavyweight hoodies, baggy silhouettes, and cyber-graffiti graphics designed with premium fashion discipline.',
+      'Custom t-shirts and hoodies with live photo placement, crop controls, and multiple colour choices.',
     accent: 'neon',
   },
-  jewelry: {
-    title: 'Jewelry Collection',
-    eyebrow: 'Gold Language',
+  modern: {
+    title: 'Modern Basics',
+    eyebrow: 'Clean Everyday',
     description:
-      'Chains, rings, bracelets, pendants, bridal sets, and minimalist pieces that move between ceremonial and everyday luxury.',
+      'Minimal tees and hoodies for gifting, batches, creator merch, and simple premium prints.',
+    accent: 'ice',
+  },
+  'home-living': {
+    title: 'Home Living',
+    eyebrow: 'Photo Gifts',
+    description:
+      'Custom pillows, blankets, mugs, and photo frames with image upload, crop controls, and size options.',
     accent: 'gold',
   },
 };
 
 export const homeCategories = [
   {
-    title: 'Traditional',
-    path: '/traditional',
-    subtitle: 'Lehengas, sherwanis, kurtas, wedding edits',
-  },
-  {
-    title: 'Modern Fashion',
-    path: '/modern',
-    subtitle: 'Sharp tailoring, dresses, suiting, minimal jewelry',
-  },
-  {
     title: 'Streetwear',
     path: '/streetwear',
-    subtitle: 'Oversized fits, graphics, cyberpunk hoodies',
+    subtitle: 'Oversized tees and hoodies with live design editing',
   },
   {
-    title: 'Jewelry',
-    path: '/jewelry',
-    subtitle: 'Chains, pendants, rings, bracelets, bridal gold',
+    title: 'Modern',
+    path: '/modern',
+    subtitle: 'Minimal printed basics for personal and group orders',
+  },
+  {
+    title: 'Home Living',
+    path: '/home-living',
+    subtitle: 'Pillows, blankets, mugs, and photo frames',
+  },
+  {
+    title: 'Custom Studio',
+    path: '/custom',
+    subtitle: 'Upload inspiration and request fully custom products',
   },
 ];
 
 export const testimonials = [
   {
-    name: 'Aisha Rahman',
-    role: 'Bride & Bespoke Client',
+    name: 'Ritika Sharma',
+    role: 'Gift Buyer',
     quote:
-      'The custom lehenga and layered temple jewelry felt museum-grade. Nothing about it looked mass-produced.',
+      'The pillow preview made it easy to crop our photo exactly how we wanted before ordering.',
   },
   {
-    name: 'Rohit Malhotra',
-    role: 'Streetwear Collector',
+    name: 'Arjun Verma',
+    role: 'College Merch Organizer',
     quote:
-      'The hoodie quality is luxury-level heavy fleece, but the visual language is pure underground culture.',
+      'The hoodie editor is much better now. We could test text colour, image size, and placement in real time.',
   },
   {
-    name: 'Zara Khan',
-    role: 'Stylist',
+    name: 'Nazia Khan',
+    role: 'Repeat Customer',
     quote:
-      'This brand understands contrast: bridal gold, tailored modernity, and streetwear attitude in one identity.',
+      'The blanket fibre and size options were clear, and the live preview gave me confidence before checkout.',
   },
 ];
 
 export const instagramMoments = [
-  'Backstage tailoring',
-  'Gold layering close-up',
-  'Night shoot streetwear',
-  'Bespoke sketch table',
-  'Wedding couture fitting',
-  'Minimal jewelry detail',
+  'Live print preview',
+  'Oversized tee drop',
+  'Campus hoodie batch',
+  'Photo gift packing',
+  'Blanket crop close-up',
+  'Frame and mug set',
 ];
 
 export const contactDetails = {

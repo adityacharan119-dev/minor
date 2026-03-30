@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, fetchRazorpayConfig } from '../../lib/api';
-import { useCart } from '../../context/CartContext';
+import { buildCartItemKey, useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
-import { formatCurrency } from '../../lib/format';
+import { formatCurrency, formatSelectedOptions } from '../../lib/format';
 import CustomizedProductPreview from '../../components/CustomizedProductPreview';
 
 const initialCustomer = {
@@ -78,7 +78,7 @@ function CheckoutPage() {
           amount: orderResponse.amount * 100,
           currency: 'INR',
           name: 'MyCraft',
-          description: 'Luxury fashion order',
+          description: 'Custom product order',
           order_id: orderResponse.gatewayOrderId,
           handler: () => {
             clearCart();
@@ -137,7 +137,7 @@ function CheckoutPage() {
           <h2 className="text-xl font-semibold text-stone-100">Order Summary</h2>
           <div className="mt-6 space-y-4">
             {cart.map((item) => (
-              <div key={`${item.id}-${item.size}-${item.color}-${JSON.stringify(item.customization)}`} className="flex items-center gap-4 rounded-[24px] border border-white/10 bg-white/5 p-4">
+              <div key={buildCartItemKey(item)} className="flex items-center gap-4 rounded-[24px] border border-white/10 bg-white/5 p-4">
                 {item.customization ? (
                   <CustomizedProductPreview
                     imageSrc={item.image}
@@ -152,7 +152,13 @@ function CheckoutPage() {
                 )}
                 <div className="flex-1">
                   <p className="font-semibold text-stone-100">{item.name}</p>
-                  <p className="text-sm text-stone-500">{item.size} • {item.color} • {item.quantity}x</p>
+                  <p className="text-sm text-stone-500">
+                    {formatSelectedOptions(item.selectedOptions, {
+                      size: item.size,
+                      color: item.color,
+                    })}{' '}
+                    • {item.quantity}x
+                  </p>
                   {item.customization ? (
                     <p className="mt-1 text-xs text-cyan-300">
                       Customized{item.customization.text ? ` • ${item.customization.text}` : ''}

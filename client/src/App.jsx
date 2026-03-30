@@ -3,10 +3,9 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import Home from './pages/Home/Home';
-import Traditional from './pages/Traditional/Traditional';
 import Modern from './pages/Modern/Modern';
 import Streetwear from './pages/Streetwear/Streetwear';
-import Jewelry from './pages/Jewelry/Jewelry';
+import HomeLiving from './pages/HomeLiving/HomeLiving';
 import Custom from './pages/Custom/Custom';
 import Admin from './pages/Admin/Admin';
 import CartPage from './pages/Cart/CartPage';
@@ -25,10 +24,9 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/traditional" element={<Traditional />} />
             <Route path="/modern" element={<Modern />} />
             <Route path="/streetwear" element={<Streetwear />} />
-            <Route path="/jewelry" element={<Jewelry />} />
+            <Route path="/home-living" element={<HomeLiving />} />
             <Route
               path="/custom"
               element={

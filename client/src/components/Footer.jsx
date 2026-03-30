@@ -9,16 +9,14 @@ function Footer() {
         <div className="space-y-4">
           <p className="headline-font text-3xl font-semibold tracking-[0.2em] text-stone-100">MYCRAFT</p>
           <p className="max-w-sm text-sm leading-7 text-stone-400">
-            Luxury fashion house for custom jewelry, wedding couture, modern tailoring, and elevated
-            streetwear.
+            Custom print studio for t-shirts, hoodies, pillows, blankets, mugs, and photo frames.
           </p>
         </div>
         <div className="space-y-3 text-sm text-stone-400">
           <p className="text-[11px] uppercase tracking-[0.35em] text-stone-500">Shop</p>
-          <Link to="/traditional">Traditional Collection</Link>
-          <Link to="/modern">Modern Fashion</Link>
           <Link to="/streetwear">Streetwear</Link>
-          <Link to="/jewelry">Jewelry</Link>
+          <Link to="/modern">Modern Basics</Link>
+          <Link to="/home-living">Home Living</Link>
         </div>
         <div className="space-y-3 text-sm text-stone-400">
           <p className="text-[11px] uppercase tracking-[0.35em] text-stone-500">Support</p>
@@ -48,7 +46,7 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-[11px] uppercase tracking-[0.35em] text-stone-500">
-        MyCraft 2026. Luxury fashion commerce experience.
+        MyCraft 2026. Real-time custom product store.
       </div>
     </footer>
   );

@@ -26,6 +26,12 @@ function CollectionPage({ collectionKey }) {
   }, [collectionKey]);
 
   const meta = collectionMeta[collectionKey];
+  const useCaseLabel =
+    collectionKey === 'streetwear'
+      ? 'T-Shirts + Hoodies'
+      : collectionKey === 'modern'
+        ? 'Daily Custom Basics'
+        : 'Photo Gifts + Decor';
   const filters = ['All', ...new Set(products.map((product) => product.subcategory))];
   const visibleProducts =
     activeFilter === 'All'
@@ -49,7 +55,7 @@ function CollectionPage({ collectionKey }) {
               </div>
               <div className="rounded-[24px] bg-gradient-to-br from-cyan-300/15 to-transparent p-5">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-stone-500">Made For</p>
-                <p className="mt-3 text-lg font-semibold text-stone-100">Ceremony + Culture</p>
+                <p className="mt-3 text-lg font-semibold text-stone-100">{useCaseLabel}</p>
               </div>
             </div>
           </div>
@@ -80,7 +86,7 @@ function CollectionPage({ collectionKey }) {
           </div>
           <div className="hidden items-center gap-2 text-sm text-stone-500 md:flex">
             <SlidersHorizontal size={16} />
-            Premium archive curation
+            Filter by product type
           </div>
         </div>
       </section>

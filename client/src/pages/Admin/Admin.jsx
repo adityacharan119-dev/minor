@@ -17,7 +17,7 @@ const initialForm = {
   price: '',
   rating: '4.8',
   description: '',
-  colors: 'Black, Gold',
+  colors: 'Jet Black, Soft White',
   sizes: 'S, M, L, XL',
   featured: false,
 };
@@ -56,7 +56,42 @@ function Admin() {
   };
 
   useEffect(() => {
-    loadData();
+    let ignore = false;
+
+    const hydrate = async () => {
+      const [dashboardData, productData, orderData, requestData] = await Promise.all([
+        fetchDashboard(),
+        fetchProducts(),
+        fetchOrders(),
+        fetchCustomRequests(),
+      ]);
+
+      if (ignore) {
+        return;
+      }
+
+      setDashboard(dashboardData);
+      setProducts(productData.products);
+      setOrders(orderData.orders);
+      setRequests(requestData.requests);
+      setQuoteDrafts(
+        Object.fromEntries(
+          requestData.requests.map((request) => [
+            request.id,
+            {
+              adminBudget: request.adminBudget ?? '',
+              quoteNotes: request.quoteNotes || '',
+            },
+          ]),
+        ),
+      );
+    };
+
+    void hydrate();
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   const handleChange = (event) => {
@@ -150,10 +185,9 @@ function Admin() {
               <label className="space-y-2">
                 <span className="text-sm text-stone-400">Collection</span>
                 <select name="collection" value={form.collection} onChange={handleChange} className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 outline-none focus:border-amber-200/40">
-                  <option value="traditional">Traditional</option>
-                  <option value="modern">Modern</option>
                   <option value="streetwear">Streetwear</option>
-                  <option value="jewelry">Jewelry</option>
+                  <option value="modern">Modern</option>
+                  <option value="home-living">Home Living</option>
                 </select>
               </label>
               <label className="space-y-2">

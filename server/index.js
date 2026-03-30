@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const crypto = require('crypto');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -29,6 +30,9 @@ const clientIndexFile = path.join(clientBuildDirectory, 'index.html');
 const hasClientBuild = fs.existsSync(clientIndexFile);
 const databaseConfigured = Boolean(process.env.MONGODB_URI);
 const uploadSizeLimit = Number(process.env.MAX_UPLOAD_SIZE_BYTES || 4 * 1024 * 1024);
+const mongoServerSelectionTimeout = Number(
+  process.env.MONGODB_SERVER_SELECTION_TIMEOUT_MS || 1500,
+);
 const allowedOrigins = String(process.env.CORS_ORIGIN || '')
   .split(',')
   .map((value) => value.trim())
@@ -66,14 +70,39 @@ const positionSchema = new mongoose.Schema(
   { _id: false },
 );
 
+const frameSchema = new mongoose.Schema(
+  {
+    x: Number,
+    y: Number,
+    width: Number,
+    height: Number,
+    radius: Number,
+  },
+  { _id: false },
+);
+
+const cropSchema = new mongoose.Schema(
+  {
+    x: Number,
+    y: Number,
+    zoom: Number,
+  },
+  { _id: false },
+);
+
 const customizationSchema = new mongoose.Schema(
   {
     text: String,
     textColor: String,
     textPosition: positionSchema,
+    textSize: Number,
     imageSrc: String,
     imagePosition: positionSchema,
     imageScale: Number,
+    imageFrame: frameSchema,
+    imageCrop: cropSchema,
+    artworkEffect: String,
+    artworkBorderColor: String,
   },
   { _id: false },
 );
@@ -87,6 +116,7 @@ const orderItemSchema = new mongoose.Schema(
     image: String,
     size: String,
     color: String,
+    selectedOptions: { type: mongoose.Schema.Types.Mixed, default: {} },
     quantity: Number,
     customization: customizationSchema,
   },
@@ -112,6 +142,7 @@ const productSchema = new mongoose.Schema(
     name: { type: String, required: true },
     collection: { type: String, required: true },
     subcategory: { type: String, required: true },
+    productType: { type: String, default: 'tee' },
     price: { type: Number, default: 0 },
     rating: { type: Number, default: 4.8 },
     colors: { type: [String], default: ['Black'] },
@@ -121,6 +152,7 @@ const productSchema = new mongoose.Schema(
     isCustomizable: { type: Boolean, default: true },
     primaryImage: { type: String, default: '' },
     images: { type: [String], default: [] },
+    customizationConfig: { type: mongoose.Schema.Types.Mixed, default: {} },
   },
   schemaOptions,
 );
@@ -131,6 +163,7 @@ const userSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, index: true },
     phone: { type: String, required: true, unique: true, index: true },
+    passwordHash: { type: String, required: true },
     createdAt: { type: String, required: true },
   },
   schemaOptions,
@@ -142,6 +175,9 @@ const pendingSignupSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, index: true },
     phone: { type: String, required: true, index: true },
+    passwordHash: { type: String, required: true },
+    otpChannel: { type: String, required: true },
+    otpTarget: { type: String, required: true },
     verificationCode: { type: String, required: true },
     expiresAt: { type: Number, required: true },
   },
@@ -215,6 +251,10 @@ const makeVerificationCode = () => String(Math.floor(100000 + Math.random() * 90
 const normalizeEmail = (value = '') => String(value).trim().toLowerCase();
 const normalizePhone = (value = '') => String(value).replace(/\D/g, '');
 const trimTrailingSlash = (value = '') => String(value).replace(/\/+$/, '');
+const normalizeOtpChannel = (value = '') => {
+  const normalized = String(value).trim().toLowerCase();
+  return normalized === 'phone' ? 'phone' : 'email';
+};
 const buildSlug = (value = '') =>
   String(value)
     .toLowerCase()
@@ -237,8 +277,100 @@ const fileExtensionByMime = {
   'image/gif': '.gif',
   'image/svg+xml': '.svg',
 };
+const defaultPreviewByType = {
+  tee: {
+    imageFrame: { x: 50, y: 46, width: 31, height: 31, radius: 18 },
+    textPosition: { x: 50, y: 72 },
+    textSize: 36,
+  },
+  hoodie: {
+    imageFrame: { x: 50, y: 46, width: 34, height: 34, radius: 18 },
+    textPosition: { x: 50, y: 72 },
+    textSize: 36,
+  },
+  pillow: {
+    imageFrame: { x: 50, y: 49, width: 50, height: 50, radius: 24 },
+    textPosition: { x: 50, y: 79 },
+    textSize: 32,
+  },
+  blanket: {
+    imageFrame: { x: 50, y: 46, width: 60, height: 41, radius: 16 },
+    textPosition: { x: 50, y: 75 },
+    textSize: 30,
+  },
+  mug: {
+    imageFrame: { x: 42, y: 49, width: 34, height: 39, radius: 12 },
+    textPosition: { x: 42, y: 76 },
+    textSize: 28,
+  },
+  frame: {
+    imageFrame: { x: 50, y: 48, width: 54, height: 58, radius: 10 },
+    textPosition: { x: 50, y: 84 },
+    textSize: 28,
+  },
+};
+
+const inferProductType = (subcategory = '', name = '') => {
+  const value = `${subcategory} ${name}`.toLowerCase();
+  if (value.includes('hoodie')) return 'hoodie';
+  if (value.includes('pillow')) return 'pillow';
+  if (value.includes('blanket')) return 'blanket';
+  if (value.includes('mug')) return 'mug';
+  if (value.includes('frame')) return 'frame';
+  return 'tee';
+};
+
+const buildDefaultCustomizationConfig = ({ productType = 'tee', sizes = [], colors = [] }) => ({
+  livePreview: true,
+  productType,
+  allowText: true,
+  allowImage: true,
+  optionGroups: [
+    ...(sizes.length ? [{ key: 'size', label: 'Size', values: sizes }] : []),
+    ...(colors.length ? [{ key: 'color', label: 'Color', values: colors }] : []),
+  ],
+  textPalette: ['#ffffff', '#111827', '#22d3ee', '#f97316', '#f59e0b', '#ec4899'],
+  framePalette: ['#ffffff', '#111827', '#22d3ee', '#f59e0b', '#fb7185'],
+  artworkEffects: ['original', 'mono', 'warm', 'cool', 'pop'],
+  previewDefaults: defaultPreviewByType[productType] || defaultPreviewByType.tee,
+  notes: [],
+});
+
+const hashPassword = (value = '') => {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(String(value), salt, 64).toString('hex');
+  return `${salt}:${hash}`;
+};
+
+const verifyPassword = (value = '', storedHash = '') => {
+  const [salt, originalHash] = String(storedHash).split(':');
+
+  if (!salt || !originalHash) {
+    return false;
+  }
+
+  const computedHash = crypto.scryptSync(String(value), salt, 64).toString('hex');
+  return crypto.timingSafeEqual(Buffer.from(originalHash, 'hex'), Buffer.from(computedHash, 'hex'));
+};
+
+const normalizeSelectedOptions = (value = {}) =>
+  Object.fromEntries(
+    Object.entries(value || {})
+      .map(([key, optionValue]) => [String(key).trim(), String(optionValue).trim()])
+      .filter(([key, optionValue]) => key && optionValue),
+  );
 
 const toPlainObject = (value) => (value?.toObject ? value.toObject() : value);
+
+const serializeUser = (user) => {
+  const plainUser = toPlainObject(user);
+  if (!plainUser) {
+    return null;
+  }
+
+  const { passwordHash, ...safeUser } = plainUser;
+  return safeUser;
+};
 
 const toAbsoluteUrl = (req, value) => {
   if (!value) {
@@ -305,6 +437,10 @@ const normalizeCustomization = (value = null) => {
     return null;
   }
 
+  const fallbackImageX = Number(value.imagePosition?.x ?? value.imageFrame?.x ?? 50);
+  const fallbackImageY = Number(value.imagePosition?.y ?? value.imageFrame?.y ?? 50);
+  const fallbackScale = Number(value.imageScale ?? value.imageCrop?.zoom ?? 1);
+
   return {
     text: String(value.text || '').trim(),
     textColor: String(value.textColor || '#ffffff'),
@@ -312,12 +448,27 @@ const normalizeCustomization = (value = null) => {
       x: Number(value.textPosition?.x ?? 50),
       y: Number(value.textPosition?.y ?? 50),
     },
+    textSize: Number(value.textSize ?? 32),
     imageSrc: String(value.imageSrc || ''),
     imagePosition: {
-      x: Number(value.imagePosition?.x ?? 50),
-      y: Number(value.imagePosition?.y ?? 50),
+      x: fallbackImageX,
+      y: fallbackImageY,
     },
-    imageScale: Number(value.imageScale ?? 1),
+    imageScale: fallbackScale,
+    imageFrame: {
+      x: fallbackImageX,
+      y: fallbackImageY,
+      width: Number(value.imageFrame?.width ?? 34),
+      height: Number(value.imageFrame?.height ?? 34),
+      radius: Number(value.imageFrame?.radius ?? 16),
+    },
+    imageCrop: {
+      x: Number(value.imageCrop?.x ?? 0),
+      y: Number(value.imageCrop?.y ?? 0),
+      zoom: fallbackScale,
+    },
+    artworkEffect: String(value.artworkEffect || 'original'),
+    artworkBorderColor: String(value.artworkBorderColor || '#ffffff'),
   };
 };
 
@@ -330,6 +481,7 @@ const normalizeOrderItems = (items = []) =>
     image: String(item.image || ''),
     size: String(item.size || ''),
     color: String(item.color || ''),
+    selectedOptions: normalizeSelectedOptions(item.selectedOptions),
     quantity: Math.max(1, Number(item.quantity || 1)),
     customization: normalizeCustomization(item.customization),
   }));
@@ -356,6 +508,21 @@ const normalizeProductRecord = (payload = {}, existing = null) => {
     payload.primaryImage !== undefined
       ? String(payload.primaryImage).trim()
       : current?.primaryImage || '';
+  const nextColors = normalizeList(payload.colors, current?.colors || ['Black']);
+  const nextSizes = normalizeList(payload.sizes, current?.sizes || ['One Size']);
+  const nextProductType =
+    payload.productType !== undefined
+      ? String(payload.productType).trim()
+      : current?.productType || inferProductType(nextSubcategory, nextName);
+  const nextCustomizationConfig =
+    payload.customizationConfig !== undefined
+      ? payload.customizationConfig
+      : current?.customizationConfig ||
+        buildDefaultCustomizationConfig({
+          productType: nextProductType,
+          sizes: nextSizes,
+          colors: nextColors,
+        });
   const nextRecord = {
     id: current?.id || makeId('prod'),
     slug:
@@ -365,10 +532,11 @@ const normalizeProductRecord = (payload = {}, existing = null) => {
     name: nextName,
     collection: nextCollection,
     subcategory: nextSubcategory,
+    productType: nextProductType,
     price: Number(payload.price ?? current?.price ?? 0),
     rating: Number(payload.rating ?? current?.rating ?? 4.8),
-    colors: normalizeList(payload.colors, current?.colors || ['Black']),
-    sizes: normalizeList(payload.sizes, current?.sizes || ['One Size']),
+    colors: nextColors,
+    sizes: nextSizes,
     description:
       payload.description !== undefined
         ? String(payload.description || '').trim()
@@ -380,8 +548,16 @@ const normalizeProductRecord = (payload = {}, existing = null) => {
         ? Boolean(payload.isCustomizable)
         : current?.isCustomizable !== undefined
           ? Boolean(current.isCustomizable)
-          : nextCollection !== 'jewelry',
+          : true,
     primaryImage: nextPrimaryImage,
+    customizationConfig:
+      nextCustomizationConfig && typeof nextCustomizationConfig === 'object'
+        ? nextCustomizationConfig
+        : buildDefaultCustomizationConfig({
+            productType: nextProductType,
+            sizes: nextSizes,
+            colors: nextColors,
+          }),
   };
 
   const shouldRefreshImages =
@@ -389,7 +565,9 @@ const normalizeProductRecord = (payload = {}, existing = null) => {
     nextRecord.name !== current.name ||
     nextRecord.collection !== current.collection ||
     nextRecord.subcategory !== current.subcategory ||
-    nextRecord.primaryImage !== current.primaryImage;
+    nextRecord.productType !== current.productType ||
+    nextRecord.primaryImage !== current.primaryImage ||
+    JSON.stringify(nextRecord.colors) !== JSON.stringify(current.colors);
 
   nextRecord.images = shouldRefreshImages
     ? createProductImages(nextRecord)
@@ -475,7 +653,9 @@ const ensureDatabase = async () => {
 
   if (!databasePromise) {
     databasePromise = mongoose
-      .connect(process.env.MONGODB_URI)
+      .connect(process.env.MONGODB_URI, {
+        serverSelectionTimeoutMS: mongoServerSelectionTimeout,
+      })
       .then(() => {
         console.log('MongoDB connection established');
         return true;
@@ -547,9 +727,22 @@ app.post(
     const name = String(req.body.name || '').trim();
     const email = normalizeEmail(req.body.email);
     const phone = normalizePhone(req.body.phone);
+    const password = String(req.body.password || '');
+    const otpChannel = normalizeOtpChannel(req.body.otpChannel);
+    const otpTarget = otpChannel === 'phone' ? phone : email;
 
-    if (!name || !email || !phone) {
-      res.status(400).json({ message: 'Name, email, and mobile number are required.' });
+    if (!name || !email || !phone || !password) {
+      res.status(400).json({ message: 'Name, email, phone, and password are required.' });
+      return;
+    }
+
+    if (password.length < 6) {
+      res.status(400).json({ message: 'Password must be at least 6 characters long.' });
+      return;
+    }
+
+    if (!otpTarget) {
+      res.status(400).json({ message: 'Choose whether to receive the OTP on email or phone.' });
       return;
     }
 
@@ -569,6 +762,9 @@ app.post(
         name,
         email,
         phone,
+        passwordHash: hashPassword(password),
+        otpChannel,
+        otpTarget,
         verificationCode: makeVerificationCode(),
         expiresAt: Date.now() + 10 * 60 * 1000,
       });
@@ -576,8 +772,10 @@ app.post(
       res.status(201).json({
         pendingSignupId: pendingSignup.id,
         expiresAt: new Date(pendingSignup.expiresAt).toISOString(),
+        otpChannel,
+        otpTarget,
         verificationCode: pendingSignup.verificationCode,
-        message: 'Verification code generated successfully.',
+        message: `OTP generated for your ${otpChannel === 'phone' ? 'phone number' : 'email address'}.`,
       });
       return;
     }
@@ -597,6 +795,9 @@ app.post(
       name,
       email,
       phone,
+      passwordHash: hashPassword(password),
+      otpChannel,
+      otpTarget,
       verificationCode: makeVerificationCode(),
       expiresAt: Date.now() + 10 * 60 * 1000,
     };
@@ -606,8 +807,10 @@ app.post(
     res.status(201).json({
       pendingSignupId: pendingSignup.id,
       expiresAt: new Date(pendingSignup.expiresAt).toISOString(),
+      otpChannel,
+      otpTarget,
       verificationCode: pendingSignup.verificationCode,
-      message: 'Verification code generated successfully.',
+      message: `OTP generated for your ${otpChannel === 'phone' ? 'phone number' : 'email address'}.`,
     });
   }),
 );
@@ -642,11 +845,12 @@ app.post(
         name: pendingSignup.name,
         email: pendingSignup.email,
         phone: pendingSignup.phone,
+        passwordHash: pendingSignup.passwordHash,
         createdAt: formatDate(),
       });
 
       await PendingSignup.deleteOne({ id: pendingSignupId });
-      res.status(201).json({ user: toPlainObject(user) });
+      res.status(201).json({ user: serializeUser(user) });
       return;
     }
 
@@ -675,47 +879,61 @@ app.post(
       name: pendingSignup.name,
       email: pendingSignup.email,
       phone: pendingSignup.phone,
+      passwordHash: pendingSignup.passwordHash,
       createdAt: formatDate(),
     };
 
     db.pendingSignups.splice(signupIndex, 1);
     db.users.unshift(user);
 
-    res.status(201).json({ user });
+    res.status(201).json({ user: serializeUser(user) });
   }),
 );
 
 app.post(
   '/api/auth/login',
   asyncHandler(async (req, res) => {
-    const email = normalizeEmail(req.body.email);
-    const phone = normalizePhone(req.body.phone);
+    const identifierRaw = String(req.body.identifier || req.body.email || req.body.phone || '').trim();
+    const password = String(req.body.password || '');
+    const isEmailLogin = identifierRaw.includes('@');
+    const email = normalizeEmail(identifierRaw);
+    const phone = normalizePhone(identifierRaw);
 
-    if (!email || !phone) {
-      res.status(400).json({ message: 'Email and mobile number are required to log in.' });
+    if (!identifierRaw || !password) {
+      res.status(400).json({ message: 'Email or phone number and password are required to log in.' });
       return;
     }
 
     if (await ensureDatabase()) {
-      const user = await User.findOne({ email, phone }).lean();
+      const user = await User.findOne(isEmailLogin ? { email } : { phone }).lean();
 
       if (!user) {
-        res.status(404).json({ message: 'No customer account matches that email and mobile number.' });
+        res.status(404).json({ message: 'No customer account matches that login.' });
         return;
       }
 
-      res.json({ user });
+      if (!verifyPassword(password, user.passwordHash)) {
+        res.status(401).json({ message: 'Incorrect password.' });
+        return;
+      }
+
+      res.json({ user: serializeUser(user) });
       return;
     }
 
-    const user = db.users.find((entry) => entry.email === email && entry.phone === phone);
+    const user = db.users.find((entry) => (isEmailLogin ? entry.email === email : entry.phone === phone));
 
     if (!user) {
-      res.status(404).json({ message: 'No customer account matches that email and mobile number.' });
+      res.status(404).json({ message: 'No customer account matches that login.' });
       return;
     }
 
-    res.json({ user });
+    if (!verifyPassword(password, user.passwordHash)) {
+      res.status(401).json({ message: 'Incorrect password.' });
+      return;
+    }
+
+    res.json({ user: serializeUser(user) });
   }),
 );
 
@@ -729,7 +947,7 @@ app.get('/api/config/razorpay', (_req, res) => {
 app.get(
   '/api/collections/summary',
   asyncHandler(async (_req, res) => {
-    const collections = ['traditional', 'modern', 'streetwear', 'jewelry'];
+    const collections = ['streetwear', 'modern', 'home-living'];
 
     if (await ensureDatabase()) {
       const counts = await Promise.all(

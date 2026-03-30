@@ -5,10 +5,9 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
 const navItems = [
-  { label: 'Traditional', to: '/traditional' },
-  { label: 'Modern', to: '/modern' },
   { label: 'Streetwear', to: '/streetwear' },
-  { label: 'Jewelry', to: '/jewelry' },
+  { label: 'Modern', to: '/modern' },
+  { label: 'Home Living', to: '/home-living' },
   { label: 'Custom', to: '/custom' },
 ];
 
@@ -38,7 +37,7 @@ function Navbar() {
   return (
     <>
       <div className="border-b border-white/10 bg-black px-4 py-2 text-center text-[11px] uppercase tracking-[0.35em] text-stone-400">
-        Receive by festive season. Custom concierge available daily.
+        Live photo preview for tees, hoodies, pillows, blankets, mugs, and frames.
       </div>
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
         <div className="section-shell flex h-20 items-center justify-between gap-6">
@@ -48,7 +47,7 @@ function Navbar() {
             </div>
             <div>
               <p className="headline-font text-2xl font-semibold tracking-[0.2em] text-stone-100">MYCRAFT</p>
-              <p className="text-[10px] uppercase tracking-[0.4em] text-stone-500">Luxury Fashion</p>
+              <p className="text-[10px] uppercase tracking-[0.4em] text-stone-500">Custom Print Studio</p>
             </div>
           </Link>
 
@@ -78,7 +77,7 @@ function Navbar() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 className="w-full bg-transparent text-sm text-stone-100 outline-none placeholder:text-stone-500"
-                placeholder="Search drops, jewelry, bridal edits"
+                placeholder="Search tees, hoodies, pillows, mugs"
               />
             </form>
           </div>
@@ -162,7 +161,7 @@ function Navbar() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 className="w-full bg-transparent text-sm text-stone-100 outline-none placeholder:text-stone-500"
-                placeholder="Search the house"
+                placeholder="Search products"
               />
             </form>
             <div className="space-y-3">

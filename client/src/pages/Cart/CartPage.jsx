@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2 } from 'lucide-react';
-import { useCart } from '../../context/CartContext';
-import { formatCurrency } from '../../lib/format';
+import { buildCartItemKey, useCart } from '../../context/CartContext';
+import { formatCurrency, formatSelectedOptions } from '../../lib/format';
 import CustomizedProductPreview from '../../components/CustomizedProductPreview';
 
 function CartPage() {
@@ -19,7 +19,7 @@ function CartPage() {
               </div>
             ) : (
               cart.map((item) => {
-                const key = `${item.id}-${item.size}-${item.color}-${JSON.stringify(item.customization)}`;
+                const key = buildCartItemKey(item);
                 return (
                   <div key={key} className="flex flex-col gap-4 rounded-[24px] border border-white/10 bg-white/5 p-4 md:flex-row">
                     {item.customization ? (
@@ -37,7 +37,12 @@ function CartPage() {
                     <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row md:items-center">
                       <div>
                         <p className="font-semibold text-stone-100">{item.name}</p>
-                        <p className="mt-2 text-sm text-stone-500">{item.size} • {item.color}</p>
+                        <p className="mt-2 text-sm text-stone-500">
+                          {formatSelectedOptions(item.selectedOptions, {
+                            size: item.size,
+                            color: item.color,
+                          })}
+                        </p>
                         {item.customization && (
                           <p className="mt-1 text-xs text-cyan-300">
                             Customized{item.customization.text ? ` • ${item.customization.text}` : ''}

@@ -8,7 +8,7 @@ const initialState = {
   name: '',
   email: '',
   phone: '',
-  productType: 'Jewelry',
+  productType: 'T-shirts',
   size: '',
   color: '',
   description: '',
@@ -79,12 +79,12 @@ function Custom() {
         <div className="luxury-panel rounded-[32px] border border-white/10 p-8">
           <SectionTitle
             eyebrow="Custom Design Studio"
-            title="Request one-of-one jewelry, dresses, hoodies, and tees."
-            description="Upload inspiration, define sizing and palette, and share your design direction. The admin decides the final budget after reviewing cloth, fitting, and finishing."
+            title="Request one-of-one tees, hoodies, pillows, blankets, mugs, and frames."
+            description="Upload inspiration, define sizing and colours, and share your design direction. The admin team can review bigger custom jobs that go beyond the live product editor."
           />
           <div className="mt-8 space-y-5 text-sm text-stone-400">
             <div className="rounded-[22px] border border-white/10 bg-white/5 p-5">
-              Jewelry sketches, bridal dressing, oversized tees, and custom-name hoodies supported.
+              Photo gifts, oversized tees, hoodies, pillows, blankets, mugs, and frames are supported.
             </div>
             <div className="rounded-[22px] border border-white/10 bg-white/5 p-5">
               The Hyderabad admin team follows up within 24 to 48 hours with pricing and production lead times.
@@ -114,10 +114,12 @@ function Custom() {
             <label className="space-y-2">
               <span className="text-sm text-stone-400">Product Type</span>
               <select name="productType" value={form.productType} onChange={handleChange} className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 outline-none focus:border-amber-200/40">
-                <option>Jewelry</option>
-                <option>Dresses</option>
-                <option>Hoodies</option>
                 <option>T-shirts</option>
+                <option>Hoodies</option>
+                <option>Pillow</option>
+                <option>Blanket</option>
+                <option>Mug</option>
+                <option>Photo Frame</option>
               </select>
             </label>
             <label className="space-y-2">
@@ -126,7 +128,7 @@ function Custom() {
             </label>
             <label className="space-y-2">
               <span className="text-sm text-stone-400">Color Selection</span>
-              <input name="color" value={form.color} onChange={handleChange} placeholder="Gold / Ivory / Onyx" className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 outline-none focus:border-amber-200/40" />
+              <input name="color" value={form.color} onChange={handleChange} placeholder="Black / White / Ivory / Oak" className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 outline-none focus:border-amber-200/40" />
             </label>
             <label className="space-y-2 md:col-span-2">
               <span className="text-sm text-stone-400">Description</span>

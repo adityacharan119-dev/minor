@@ -1,6 +1,17 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext(null);
+
+const normalizeSelectedOptions = (selectedOptions = {}) =>
+  Object.fromEntries(
+    Object.entries(selectedOptions || {})
+      .map(([key, value]) => [String(key).trim(), String(value).trim()])
+      .filter(([key, value]) => key && value),
+  );
+
+export const buildCartItemKey = (item) =>
+  `${item.id}-${JSON.stringify(item.selectedOptions || { size: item.size, color: item.color })}-${JSON.stringify(item.customization || null)}`;
 
 const readStorage = (key, fallback) => {
   if (typeof window === 'undefined') {
@@ -32,53 +43,53 @@ export function CartProvider({ children }) {
     const color = options.color || product.colors?.[0] || 'Default';
     const quantity = options.quantity || 1;
     const customization = options.customization || null;
+    const selectedOptions = normalizeSelectedOptions(
+      Object.keys(options.selectedOptions || {}).length
+        ? options.selectedOptions
+        : {
+            size,
+            color,
+          },
+    );
 
     setCart((previous) => {
-      const existing = previous.find(
-        (item) => item.id === product.id && item.size === size && item.color === color && JSON.stringify(item.customization) === JSON.stringify(customization),
-      );
+      const nextItem = {
+        id: product.id,
+        slug: product.slug,
+        name: product.name,
+        price: product.price,
+        image: options.previewImage || product.images?.[0],
+        size: selectedOptions.size || size,
+        color: selectedOptions.color || color,
+        selectedOptions,
+        quantity,
+        customization,
+      };
+
+      const existing = previous.find((item) => buildCartItemKey(item) === buildCartItemKey(nextItem));
 
       if (existing) {
         return previous.map((item) =>
-          item.id === existing.id && item.size === size && item.color === color && JSON.stringify(item.customization) === JSON.stringify(customization)
+          buildCartItemKey(item) === buildCartItemKey(existing)
             ? { ...item, quantity: item.quantity + quantity }
             : item,
         );
       }
 
-      return [
-        ...previous,
-        {
-          id: product.id,
-          slug: product.slug,
-          name: product.name,
-          price: product.price,
-          image: options.previewImage || product.images?.[0],
-          size,
-          color,
-          quantity,
-          customization,
-        },
-      ];
+      return [...previous, nextItem];
     });
   };
 
   const updateQuantity = (itemKey, quantity) => {
     setCart((previous) =>
       previous
-        .map((item) =>
-          `${item.id}-${item.size}-${item.color}-${JSON.stringify(item.customization)}` === itemKey
-            ? { ...item, quantity: Math.max(1, quantity) }
-            : item,
-        )
+        .map((item) => (buildCartItemKey(item) === itemKey ? { ...item, quantity: Math.max(1, quantity) } : item))
         .filter((item) => item.quantity > 0),
     );
   };
 
   const removeFromCart = (itemKey) => {
-    setCart((previous) =>
-      previous.filter((item) => `${item.id}-${item.size}-${item.color}-${JSON.stringify(item.customization)}` !== itemKey),
-    );
+    setCart((previous) => previous.filter((item) => buildCartItemKey(item) !== itemKey));
   };
 
   const clearCart = () => setCart([]);
@@ -93,24 +104,22 @@ export function CartProvider({ children }) {
 
   const isWishlisted = (id) => wishlist.some((item) => item.id === id);
 
-  const value = useMemo(() => {
-    const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-    const shipping = cart.length ? 250 : 0;
-    return {
-      cart,
-      wishlist,
-      addToCart,
-      updateQuantity,
-      removeFromCart,
-      clearCart,
-      toggleWishlist,
-      isWishlisted,
-      subtotal,
-      shipping,
-      total: subtotal + shipping,
-      cartCount: cart.reduce((totalItems, item) => totalItems + item.quantity, 0),
-    };
-  }, [cart, wishlist]);
+  const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  const shipping = cart.length ? 250 : 0;
+  const value = {
+    cart,
+    wishlist,
+    addToCart,
+    updateQuantity,
+    removeFromCart,
+    clearCart,
+    toggleWishlist,
+    isWishlisted,
+    subtotal,
+    shipping,
+    total: subtotal + shipping,
+    cartCount: cart.reduce((totalItems, item) => totalItems + item.quantity, 0),
+  };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

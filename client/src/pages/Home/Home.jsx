@@ -31,13 +31,13 @@ function Home() {
                   <span>Custom Jewelry + Fashion</span>
                 </div>
                 <div className="max-w-xl space-y-6">
-                  <p className="text-[11px] uppercase tracking-[0.45em] text-amber-200">Imagine Your Signature</p>
+                  <p className="text-[11px] uppercase tracking-[0.45em] text-amber-200">Edit It Live</p>
                   <h1 className="headline-font text-6xl font-semibold leading-none text-stone-100 md:text-8xl">
-                    Luxury fashion crafted for heritage, street culture, and bespoke identity.
+                    Real-time custom products for streetwear, gifts, and home moments.
                   </h1>
                   <p className="max-w-lg text-base leading-7 text-stone-400 md:text-lg">
-                    Custom jewelry, traditional wedding couture, modern tailoring, oversized streetwear
-                    essentials, and made-to-order hoodies designed with premium detailing.
+                    Upload a photo, crop it, resize it, and preview it instantly on t-shirts, hoodies,
+                    pillows, blankets, mugs, and photo frames.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Link
@@ -88,8 +88,8 @@ function Home() {
       <section className="section-shell mt-14">
         <SectionTitle
           eyebrow="Curated Categories"
-          title="A luxury fashion universe with ceremonial depth and streetwear energy."
-          description="Each line carries its own visual code while staying inside the same premium house language."
+          title="Streetwear first, with photo gifts and home products ready for live editing."
+          description="Each collection is built around faster customization, clearer pricing, and real-time previewing."
         />
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {homeCategories.map((category, index) => (
@@ -126,8 +126,8 @@ function Home() {
         <div className="flex items-end justify-between gap-6">
           <SectionTitle
             eyebrow="Featured Products"
-            title="Large imagery, couture finish, and premium product storytelling."
-            description="Best-selling edits across jewelry, traditional dressing, modern tailoring, and streetwear."
+            title="Best-selling custom pieces under ₹2000."
+            description="Priority is on t-shirts and hoodies, with pillows, blankets, mugs, and frames ready to personalize."
           />
           <Link to="/search" className="hidden text-sm uppercase tracking-[0.35em] text-stone-400 md:block">
             View All
@@ -149,12 +149,12 @@ function Home() {
           <div className="luxury-panel rounded-[32px] border border-white/10 p-8 md:p-10">
             <p className="text-[11px] uppercase tracking-[0.4em] text-cyan-300">Brand Story</p>
             <h2 className="headline-font mt-4 text-5xl font-semibold text-stone-100">
-              Built like a bridal atelier, styled like a streetwear label.
+              Built for customization, not guesswork.
             </h2>
             <p className="mt-5 text-base leading-7 text-stone-400">
-              MyCraft blends ceremonial gold codes, handcrafted detailing, and directional fashion silhouettes.
-              The result is a premium commerce experience where a bridal necklace, sharp blazer, and oversized
-              hoodie can sit in the same universe without feeling diluted.
+              MyCraft now focuses on affordable custom products that customers can actually edit in real time.
+              The goal is simple: upload an image, crop it properly, change colours, preview it instantly, and
+              buy with confidence.
             </p>
             <Link
               to="/custom"

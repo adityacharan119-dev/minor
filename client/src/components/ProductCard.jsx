@@ -1,6 +1,5 @@
 import { Heart, ShoppingBag, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { formatCurrency } from '../lib/format';
 
@@ -13,10 +12,7 @@ function ProductCard({ product, accent = 'gold' }) {
       : 'from-amber-300/25 via-amber-200/10 to-transparent border-amber-200/15';
 
   return (
-    <motion.article
-      whileHover={{ y: -6 }}
-      className={`group relative overflow-hidden rounded-[28px] border bg-zinc-950/70 ${accentClasses} luxury-panel`}
-    >
+    <article className={`group relative overflow-hidden rounded-[28px] border bg-zinc-950/70 ${accentClasses} luxury-panel transition duration-300 hover:-translate-y-1.5`}>
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b pointer-events-none" />
       <Link to={`/product/${product.slug}`} className="block">
         <div className="aspect-[4/5] overflow-hidden rounded-[26px]">
@@ -66,7 +62,7 @@ function ProductCard({ product, accent = 'gold' }) {
           </button>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 

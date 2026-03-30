@@ -17,7 +17,7 @@ function SearchPage() {
 
   return (
     <div className="section-shell py-10">
-      <SectionTitle eyebrow="Search" title={title} description="Use the top navigation search to filter products across all collections." />
+      <SectionTitle eyebrow="Search" title={title} description="Use the top navigation search to filter tees, hoodies, pillows, blankets, mugs, and frames." />
       <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} accent={product.collection === 'streetwear' || product.collection === 'modern' ? 'neon' : 'gold'} />
