@@ -23,6 +23,33 @@ const collectionThemes = {
 
 const snapshotLabels = ['Front View', 'Studio Crop', 'Detail Focus', 'Lifestyle Angle', 'Close Finish'];
 
+const productPhotoLibraries = {
+  tee: [
+    'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1200&auto=format&fit=crop',
+  ],
+  hoodie: [
+    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1524255684952-d7185b509571?q=80&w=1200&auto=format&fit=crop',
+  ],
+  pillow: [
+    'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop',
+  ],
+  blanket: [
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=1200&auto=format&fit=crop',
+  ],
+  mug: [
+    'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop',
+  ],
+  frame: [
+    'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1484101403633-562f891dc89a?q=80&w=1200&auto=format&fit=crop',
+  ],
+};
+
 const colorTokens = {
   'Jet Black': '#10131a',
   'Soft White': '#f8fafc',
@@ -200,8 +227,11 @@ const createProductImage = (product, variant = 0) => {
   `);
 };
 
-const createProductImages = (product) =>
-  Array.from({ length: 5 }, (_, index) => createProductImage(product, index));
+const createProductImages = (product) => {
+  const productPhotos = productPhotoLibraries[product.productType] || [];
+  const generated = Array.from({ length: 3 }, (_, index) => createProductImage(product, index + 2));
+  return [...productPhotos, ...generated];
+};
 
 const makeProduct = ({
   id,
@@ -234,7 +264,7 @@ const makeProduct = ({
     description,
     featured,
     isCustomizable: true,
-    primaryImage: '',
+    primaryImage: productPhotoLibraries[productType]?.[0] || '',
     customizationConfig: buildCustomizationConfig({
       productType,
       optionGroups,

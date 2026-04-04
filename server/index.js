@@ -7,6 +7,7 @@ const os = require('os');
 const path = require('path');
 const multer = require('multer');
 const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
 const Razorpay = require('razorpay');
 const { createProductImages, seedProducts } = require('./data');
 
@@ -33,6 +34,13 @@ const uploadSizeLimit = Number(process.env.MAX_UPLOAD_SIZE_BYTES || 4 * 1024 * 1
 const mongoServerSelectionTimeout = Number(
   process.env.MONGODB_SERVER_SELECTION_TIMEOUT_MS || 1500,
 );
+const smtpPort = Number(process.env.SMTP_PORT || 587);
+const smtpSecure = String(process.env.SMTP_SECURE || '').toLowerCase() === 'true';
+const otpEmailConfigured =
+  Boolean(process.env.SMTP_HOST) &&
+  Boolean(process.env.SMTP_USER) &&
+  Boolean(process.env.SMTP_PASS) &&
+  Boolean(process.env.SMTP_FROM_EMAIL);
 const allowedOrigins = String(process.env.CORS_ORIGIN || '')
   .split(',')
   .map((value) => value.trim())
@@ -56,6 +64,18 @@ const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_placeholder',
   key_secret: process.env.RAZORPAY_KEY_SECRET || 'secret_placeholder',
 });
+
+const mailTransport = otpEmailConfigured
+  ? nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: smtpPort,
+      secure: smtpSecure,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    })
+  : null;
 
 const schemaOptions = {
   suppressReservedKeysWarning: true,
@@ -240,6 +260,7 @@ const db = {
   users: [],
   pendingSignups: [],
 };
+const curatedSeedIds = seedProducts.map((product) => product.id);
 
 let databasePromise = null;
 let seedPromise = null;
@@ -351,6 +372,39 @@ const verifyPassword = (value = '', storedHash = '') => {
 
   const computedHash = crypto.scryptSync(String(value), salt, 64).toString('hex');
   return crypto.timingSafeEqual(Buffer.from(originalHash, 'hex'), Buffer.from(computedHash, 'hex'));
+};
+
+const sendSignupOtpEmail = async ({ email, name, verificationCode, expiresAt }) => {
+  if (!mailTransport) {
+    throw new Error('Email OTP delivery is not configured on the server.');
+  }
+
+  const expiresAtText = new Date(expiresAt).toLocaleString('en-IN', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  });
+
+  await mailTransport.sendMail({
+    from: process.env.SMTP_FROM_EMAIL,
+    to: email,
+    subject: 'MyCraft signup OTP',
+    text: `Hello ${name}, your MyCraft signup OTP is ${verificationCode}. It expires on ${expiresAtText}.`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; background: #0b1120; color: #f8fafc; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+        <p style="font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase; color: #22d3ee; margin: 0 0 18px;">MyCraft Signup</p>
+        <h1 style="font-size: 28px; margin: 0 0 14px;">Verify your email</h1>
+        <p style="font-size: 16px; line-height: 1.7; color: #cbd5e1; margin: 0 0 24px;">
+          Hello ${name}, use the OTP below to complete your MyCraft account signup.
+        </p>
+        <div style="padding: 18px 22px; border-radius: 16px; background: #111827; border: 1px solid rgba(34,211,238,0.35); display: inline-block; font-size: 34px; font-weight: 700; letter-spacing: 0.36em; color: #f8fafc;">
+          ${verificationCode}
+        </div>
+        <p style="font-size: 14px; line-height: 1.7; color: #94a3b8; margin: 24px 0 0;">
+          This OTP expires on ${expiresAtText}. If you did not request this signup, you can ignore this email.
+        </p>
+      </div>
+    `,
+  });
 };
 
 const normalizeSelectedOptions = (value = {}) =>
@@ -628,10 +682,22 @@ const ensureSeedData = async () => {
   }
 
   seedPromise = (async () => {
-    const productCount = await Product.estimatedDocumentCount();
-    if (productCount === 0) {
-      await Product.insertMany(seedProducts);
-    }
+    await Product.bulkWrite(
+      seedProducts.map((product) => ({
+        updateOne: {
+          filter: { id: product.id },
+          update: { $set: product },
+          upsert: true,
+        },
+      })),
+    );
+
+    await Product.deleteMany({
+      $and: [
+        { id: { $regex: /^p\d+$/ } },
+        { id: { $nin: curatedSeedIds } },
+      ],
+    });
   })().catch((error) => {
     seedPromise = null;
     throw error;
@@ -729,7 +795,7 @@ app.post(
     const phone = normalizePhone(req.body.phone);
     const password = String(req.body.password || '');
     const otpChannel = normalizeOtpChannel(req.body.otpChannel);
-    const otpTarget = otpChannel === 'phone' ? phone : email;
+    const otpTarget = email;
 
     if (!name || !email || !phone || !password) {
       res.status(400).json({ message: 'Name, email, phone, and password are required.' });
@@ -741,8 +807,20 @@ app.post(
       return;
     }
 
-    if (!otpTarget) {
-      res.status(400).json({ message: 'Choose whether to receive the OTP on email or phone.' });
+    if (!email) {
+      res.status(400).json({ message: 'A valid email address is required for OTP delivery.' });
+      return;
+    }
+
+    if (otpChannel === 'phone') {
+      res.status(400).json({ message: 'Phone OTP is not configured yet. Please use email OTP.' });
+      return;
+    }
+
+    if (!otpEmailConfigured) {
+      res.status(503).json({
+        message: 'Email OTP delivery is not configured on the server yet.',
+      });
       return;
     }
 
@@ -757,25 +835,37 @@ app.post(
 
       await PendingSignup.deleteMany({ $or: [{ email }, { phone }] });
 
-      const pendingSignup = await PendingSignup.create({
+      const pendingSignupPayload = {
         id: makeId('pending'),
         name,
         email,
         phone,
         passwordHash: hashPassword(password),
-        otpChannel,
+        otpChannel: 'email',
         otpTarget,
         verificationCode: makeVerificationCode(),
         expiresAt: Date.now() + 10 * 60 * 1000,
-      });
+      };
+
+      const pendingSignup = await PendingSignup.create(pendingSignupPayload);
+
+      try {
+        await sendSignupOtpEmail(pendingSignupPayload);
+      } catch (error) {
+        await PendingSignup.deleteOne({ id: pendingSignup.id });
+        res.status(502).json({
+          message: 'Unable to send OTP email right now. Please try again later.',
+          detail: process.env.NODE_ENV === 'production' ? undefined : error.message,
+        });
+        return;
+      }
 
       res.status(201).json({
         pendingSignupId: pendingSignup.id,
         expiresAt: new Date(pendingSignup.expiresAt).toISOString(),
-        otpChannel,
+        otpChannel: 'email',
         otpTarget,
-        verificationCode: pendingSignup.verificationCode,
-        message: `OTP generated for your ${otpChannel === 'phone' ? 'phone number' : 'email address'}.`,
+        message: 'An OTP has been sent to your email address.',
       });
       return;
     }
@@ -796,21 +886,30 @@ app.post(
       email,
       phone,
       passwordHash: hashPassword(password),
-      otpChannel,
+      otpChannel: 'email',
       otpTarget,
       verificationCode: makeVerificationCode(),
       expiresAt: Date.now() + 10 * 60 * 1000,
     };
+
+    try {
+      await sendSignupOtpEmail(pendingSignup);
+    } catch (error) {
+      res.status(502).json({
+        message: 'Unable to send OTP email right now. Please try again later.',
+        detail: process.env.NODE_ENV === 'production' ? undefined : error.message,
+      });
+      return;
+    }
 
     db.pendingSignups.unshift(pendingSignup);
 
     res.status(201).json({
       pendingSignupId: pendingSignup.id,
       expiresAt: new Date(pendingSignup.expiresAt).toISOString(),
-      otpChannel,
+      otpChannel: 'email',
       otpTarget,
-      verificationCode: pendingSignup.verificationCode,
-      message: `OTP generated for your ${otpChannel === 'phone' ? 'phone number' : 'email address'}.`,
+      message: 'An OTP has been sent to your email address.',
     });
   }),
 );

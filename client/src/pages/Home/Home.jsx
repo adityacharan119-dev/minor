@@ -6,6 +6,7 @@ import { formatCurrency } from '../../lib/format';
 import { homeCategories, instagramMoments, testimonials } from '../../data/site';
 import ProductCard from '../../components/ProductCard';
 import SectionTitle from '../../components/SectionTitle';
+import brandEmblem from '../../assets/brand-emblem.svg';
 
 function Home() {
   const [featured, setFeatured] = useState([]);
@@ -25,10 +26,14 @@ function Home() {
               <div className="absolute left-[-10%] top-16 h-72 w-72 rounded-full border border-white/10 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.08),rgba(0,0,0,0.1)_45%,rgba(212,175,53,0.25)_75%,transparent_76%)] shadow-[0_0_120px_rgba(212,175,53,0.18)]" />
               <div className="absolute left-[18%] top-[19%] h-48 w-48 rounded-full border border-white/10 bg-[radial-gradient(circle_at_35%_35%,rgba(255,255,255,0.1),rgba(0,0,0,0.18)_46%,rgba(255,255,255,0.04)_68%,transparent_70%)]" />
               <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black via-black/80 to-transparent" />
+              <div className="absolute right-8 top-8 hidden w-40 rounded-[30px] border border-white/10 bg-white/5 p-3 backdrop-blur md:block">
+                <img src={brandEmblem} alt="MyCraft iconic brand emblem" className="w-full rounded-[24px]" />
+                <p className="mt-3 text-[10px] uppercase tracking-[0.35em] text-stone-400">Brand Mark</p>
+              </div>
               <div className="relative z-10 flex h-full flex-col justify-between">
                 <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.35em] text-stone-500">
                   <span>MyCraft</span>
-                  <span>Custom Jewelry + Fashion</span>
+                  <span>Custom Prints + Photo Gifts</span>
                 </div>
                 <div className="max-w-xl space-y-6">
                   <p className="text-[11px] uppercase tracking-[0.45em] text-amber-200">Edit It Live</p>

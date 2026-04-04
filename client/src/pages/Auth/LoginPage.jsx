@@ -5,9 +5,7 @@ import {
   KeyRound,
   LockKeyhole,
   LogIn,
-  Mail,
   ShieldCheck,
-  Smartphone,
   UserPlus,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -23,7 +21,7 @@ const initialSignupForm = {
   phone: '',
   password: '',
   confirmPassword: '',
-  otpChannel: 'phone',
+  otpChannel: 'email',
 };
 
 function LoginPage() {
@@ -104,7 +102,7 @@ function LoginPage() {
       setSignupState({
         submitting: false,
         type: 'success',
-        message: `OTP generated for your ${response.otpChannel === 'phone' ? 'phone number' : 'email address'}. Enter the 6-digit code to complete signup.`,
+        message: 'We sent a 6-digit OTP to your email address. Enter it below to complete signup.',
       });
     } catch (error) {
       setSignupState({
@@ -157,8 +155,8 @@ function LoginPage() {
             Signup with password, then verify with OTP.
           </h1>
           <p className="mt-5 max-w-xl text-base leading-7 text-stone-400">
-            Customers now create a password during signup and can choose whether the OTP is generated
-            for their phone number or email address before the account becomes active.
+            Customers now create a password during signup, then complete account verification with the
+            OTP sent to their email address.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
@@ -300,46 +298,8 @@ function LoginPage() {
                     />
                   </label>
                 </div>
-                <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
-                  <p className="text-sm font-semibold text-stone-100">Generate OTP On</p>
-                  <div className="mt-4 grid gap-3 md:grid-cols-2">
-                    {[
-                      {
-                        value: 'phone',
-                        label: 'Phone Number',
-                        icon: Smartphone,
-                      },
-                      {
-                        value: 'email',
-                        label: 'Email Address',
-                        icon: Mail,
-                      },
-                    ].map((item) => {
-                      const IconComponent = item.icon;
-
-                      return (
-                      <label
-                        key={item.value}
-                        className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm ${
-                          signupForm.otpChannel === item.value
-                            ? 'border-cyan-300/40 bg-cyan-300/10 text-cyan-100'
-                            : 'border-white/10 bg-black/20 text-stone-300'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="otpChannel"
-                          value={item.value}
-                          checked={signupForm.otpChannel === item.value}
-                          onChange={handleSignupChange}
-                          className="sr-only"
-                        />
-                        <IconComponent size={16} />
-                        {item.label}
-                      </label>
-                      );
-                    })}
-                  </div>
+                <div className="rounded-[24px] border border-white/10 bg-white/5 p-5 text-sm leading-6 text-stone-300">
+                  Your signup OTP will be sent to <span className="text-stone-100">{signupForm.email || 'your email address'}</span>.
                 </div>
                 {signupState.message ? (
                   <p className={`text-sm ${signupState.type === 'error' ? 'text-red-300' : 'text-emerald-300'}`}>
@@ -366,13 +326,10 @@ function LoginPage() {
                     <p className="text-sm font-semibold uppercase tracking-[0.25em]">Verify Signup</p>
                   </div>
                   <p className="mt-3 text-sm leading-6 text-stone-400">
-                    Enter the OTP generated for{' '}
+                    Enter the OTP sent to{' '}
                     <span className="text-stone-100">{signupSession.otpTarget}</span> to activate the
                     customer account.
                   </p>
-                  <div className="mt-4 rounded-2xl border border-amber-200/20 bg-amber-200/10 px-4 py-3 text-sm text-amber-100">
-                    Demo OTP: <span className="font-semibold">{signupSession.verificationCode}</span>
-                  </div>
                   <label className="mt-4 block space-y-2">
                     <span className="text-sm text-stone-400">OTP</span>
                     <input

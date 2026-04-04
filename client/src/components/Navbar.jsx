@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Heart, LogOut, Menu, Search, ShoppingBag, Sparkles, UserRound, X } from 'lucide-react';
+import { Heart, LogOut, Menu, Search, ShoppingBag, UserRound, X } from 'lucide-react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import brandEmblem from '../assets/brand-emblem.svg';
 
 const navItems = [
   { label: 'Streetwear', to: '/streetwear' },
@@ -42,9 +43,11 @@ function Navbar() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
         <div className="section-shell flex h-20 items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full border border-amber-200/20 bg-amber-200/10">
-              <Sparkles className="text-amber-200" size={18} />
-            </div>
+            <img
+              src={brandEmblem}
+              alt="MyCraft brand emblem"
+              className="h-12 w-12 rounded-2xl border border-white/10 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+            />
             <div>
               <p className="headline-font text-2xl font-semibold tracking-[0.2em] text-stone-100">MYCRAFT</p>
               <p className="text-[10px] uppercase tracking-[0.4em] text-stone-500">Custom Print Studio</p>
