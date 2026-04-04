@@ -5,6 +5,7 @@ import {
   fetchDashboard,
   fetchOrders,
   fetchProducts,
+  fetchUsers,
   updateCustomRequestQuote,
   updateProduct,
 } from '../../lib/api';
@@ -26,21 +27,24 @@ function Admin() {
   const [dashboard, setDashboard] = useState(null);
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [users, setUsers] = useState([]);
   const [requests, setRequests] = useState([]);
   const [quoteDrafts, setQuoteDrafts] = useState({});
   const [form, setForm] = useState(initialForm);
   const [editingId, setEditingId] = useState(null);
 
   const loadData = async () => {
-    const [dashboardData, productData, orderData, requestData] = await Promise.all([
+    const [dashboardData, productData, orderData, userData, requestData] = await Promise.all([
       fetchDashboard(),
       fetchProducts(),
       fetchOrders(),
+      fetchUsers(),
       fetchCustomRequests(),
     ]);
     setDashboard(dashboardData);
     setProducts(productData.products);
     setOrders(orderData.orders);
+    setUsers(userData.users);
     setRequests(requestData.requests);
     setQuoteDrafts(
       Object.fromEntries(
@@ -59,10 +63,11 @@ function Admin() {
     let ignore = false;
 
     const hydrate = async () => {
-      const [dashboardData, productData, orderData, requestData] = await Promise.all([
+      const [dashboardData, productData, orderData, userData, requestData] = await Promise.all([
         fetchDashboard(),
         fetchProducts(),
         fetchOrders(),
+        fetchUsers(),
         fetchCustomRequests(),
       ]);
 
@@ -73,6 +78,7 @@ function Admin() {
       setDashboard(dashboardData);
       setProducts(productData.products);
       setOrders(orderData.orders);
+      setUsers(userData.users);
       setRequests(requestData.requests);
       setQuoteDrafts(
         Object.fromEntries(
@@ -158,7 +164,7 @@ function Admin() {
           <div className="luxury-panel rounded-[32px] border border-white/10 p-8">
             <p className="text-[11px] uppercase tracking-[0.35em] text-amber-200">Admin Dashboard</p>
             <h1 className="headline-font mt-4 text-5xl font-semibold text-stone-100">Operate the house.</h1>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {dashboard?.stats.map((stat) => (
                 <div key={stat.label} className="rounded-[24px] border border-white/10 bg-white/5 p-5">
                   <p className="text-sm text-stone-500">{stat.label}</p>
@@ -252,6 +258,36 @@ function Admin() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="luxury-panel rounded-[32px] border border-white/10 p-8">
+            <h2 className="text-xl font-semibold text-stone-100">Users</h2>
+            <div className="mt-5 space-y-3">
+              {users.length ? (
+                users.slice(0, 10).map((user) => (
+                  <div
+                    key={user.id}
+                    className="flex items-center justify-between gap-4 rounded-[24px] border border-white/10 bg-white/5 p-4"
+                  >
+                    <div>
+                      <p className="font-semibold text-stone-100">{user.name}</p>
+                      <p className="text-sm text-stone-500">{user.email}</p>
+                      <p className="text-sm text-stone-500">{user.phone}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-stone-300">Customer</p>
+                      <p className="text-sm text-stone-500">
+                        {user.createdAt ? new Date(user.createdAt).toLocaleString('en-IN') : 'Unknown'}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 text-sm text-stone-400">
+                  No registered customers yet.
+                </div>
+              )}
             </div>
           </div>
 

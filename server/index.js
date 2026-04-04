@@ -1176,6 +1176,23 @@ app.put(
 );
 
 app.get(
+  '/api/users',
+  asyncHandler(async (_req, res) => {
+    if (await ensureDatabase()) {
+      const users = await User.find().sort({ createdAt: -1 }).lean();
+      res.json({ users: users.map((user) => serializeUser(user)) });
+      return;
+    }
+
+    res.json({
+      users: [...db.users]
+        .sort((left, right) => String(right.createdAt).localeCompare(String(left.createdAt)))
+        .map((user) => serializeUser(user)),
+    });
+  }),
+);
+
+app.get(
   '/api/orders',
   asyncHandler(async (req, res) => {
     if (await ensureDatabase()) {
@@ -1376,9 +1393,10 @@ app.get(
   '/api/dashboard',
   asyncHandler(async (_req, res) => {
     if (await ensureDatabase()) {
-      const [productsCount, ordersCount, revenue] = await Promise.all([
+      const [productsCount, ordersCount, usersCount, revenue] = await Promise.all([
         Product.countDocuments(),
         Order.countDocuments(),
+        User.countDocuments(),
         Order.aggregate([
           {
             $group: {
@@ -1395,6 +1413,7 @@ app.get(
         stats: [
           { label: 'Products', value: String(productsCount) },
           { label: 'Orders', value: String(ordersCount) },
+          { label: 'Users', value: String(usersCount) },
           { label: 'Revenue', value: `INR ${totalRevenue.toLocaleString('en-IN')}` },
         ],
       });
@@ -1407,6 +1426,7 @@ app.get(
       stats: [
         { label: 'Products', value: String(db.products.length) },
         { label: 'Orders', value: String(db.orders.length) },
+        { label: 'Users', value: String(db.users.length) },
         { label: 'Revenue', value: `INR ${totalRevenue.toLocaleString('en-IN')}` },
       ],
     });

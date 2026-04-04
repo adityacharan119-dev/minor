@@ -58,6 +58,11 @@ export const fetchOrders = async () => {
   return data;
 };
 
+export const fetchUsers = async () => {
+  const { data } = await api.get('/users');
+  return data;
+};
+
 export const fetchCustomRequests = async () => {
   const { data } = await api.get('/custom-requests');
   return data;
